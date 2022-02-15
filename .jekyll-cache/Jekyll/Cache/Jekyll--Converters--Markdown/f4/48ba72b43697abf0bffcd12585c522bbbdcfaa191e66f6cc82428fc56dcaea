@@ -1,0 +1,13 @@
+I"y<p>파이썬 멀티프로세싱 프로세스를 알아보자
+<!--excerpt--></p>
+<h2 id="배경-지식">배경 지식</h2>
+<p>현재 시판중인 프로세서들은 모두 멀티코어-프로세서라는, 하나의 프로세서 안에 여러 개의 미니 프로세서<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>들이 들어가 있는 구조이다.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>코어라고도 한다. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

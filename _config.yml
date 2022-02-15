@@ -83,3 +83,6 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+# one below <!--excerpt--> is content, else is excerpt
+excerpt_seperator:  <!--excerpt-->

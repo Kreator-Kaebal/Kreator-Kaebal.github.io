@@ -2,10 +2,8 @@
 layout: post
 title: 외전-프로세스와 쓰레드
 tags : [computer science]
+excerpt : 컴퓨터 과학 관점에서 설명하는 프로세스, 쓰레드, 멀티프로세싱, 멀티쓰레딩
 ---
-
-컴퓨터 과학 관점에서 설명하는 프로세스, 쓰레드, 멀티프로세싱, 멀티쓰레딩
-<!--excerpt-->
 ## 지난 이야기
 저번에는 파이썬 multiprocessing 라이브러리의 process와 pool 기능을 알아보았다.  
 그래서 이번에는 파이썬 쓰레딩 사용법을 설명해야 하는데...  

@@ -2,11 +2,8 @@
 layout: post
 title: 알고리듬 문제를 풀어보자-dfs
 tags : [algorithm]
+excerpt : dfs 알고리듬과 실전문제
 ---
-
-dfs 알고리듬과 실전문제
-<!--excerpt-->
-
 ## 시작하면서
 이번에는 알고리듬 문제를 풀어보겠다.  
 알고리듬은 프로그래머의 기본 중 기본이기 때문이다.  

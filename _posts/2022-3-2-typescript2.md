@@ -55,8 +55,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
   * -E 옵션은 **버전 고정**을 뜻한다. 이렇게 하면 dependencies에 이 버전 이하도 이상도 아닌 정확한 버전으로 설치되도록 설정된다.
     * 참고로 dependencies를 보면 보통은 ^(버전명) 이렇게 되어 있는데, 이는 *이 버전 이상으로 설치*하라는 의미이다.
 * ```create-react-app```으로 생성한 리액트 프로젝트에는 **ESLint**[^1]라는 모듈이 기본적으로 깔려 있다.
-  * ESLint는 플러그인과 설정이라는 것으로 구성되어 있으며, 이 둘을 적절히 선택할 수 있다.
-  * Prettier와 ESLint를 그대로 같이 사용하면 모듈 충돌이 일어나므로, 충돌을 막아주는 ESLint 플러그인과 설정인  
+  * Prettier와 ESLint를 그대로 같이 사용하면 모듈 충돌이 일어나므로, 충돌을 막기 위해  
   ```npm i eslint-plugin-prettier eslint-config-prettier -D```  
   를 설치해준다.
   * 또한  
@@ -88,9 +87,10 @@ excerpt : 타입스크립트 클론 코딩-사전준비
   > ? Would you like to install them now with npm?
   > **Yes**
 
-* 설정이 끝나면 폴더에 ```.eslintrc.json```이 생길 것이다. 이 파일이 ESLint 설정을 담고 있는 곳인데, 아래와 같이 바꿔준다.
+* 설정이 끝나면 폴더에 ```.eslintrc.json```이 생길 것이다. 이 파일이 ESLint 설정을 담고 있는 곳인데, 아래와 같이 바꿔준다.  
+대충 ESLint가 체크하는 언어를 타입스크립트로 하고, prettier를 연동한다는 말이다.
 
-    ```
+    ```JSON
     {
         "env": {
             "browser": true,
@@ -100,11 +100,11 @@ excerpt : 타입스크립트 클론 코딩-사전준비
         "extends": [
             "plugin:react/recommended",
             "airbnb",
-            "plugin:@typescript-eslint/recommended",
             "plugin:prettier/recommended"
         ],
         "parser": "@typescript-eslint/parser",
         "parserOptions": {
+            "project": ".tsconfig.json",
             "ecmaFeatures": {
                 "jsx": true
             },
@@ -116,37 +116,71 @@ excerpt : 타입스크립트 클론 코딩-사전준비
             "@typescript-eslint",
             "prettier"
         ],
+        "ignorePatterns": ["dist/*", "node_modules/*", ".next/*", "next.config.js"],
         "rules": {
+            "react/react-in-jsx-scope": 0,
+            "react/prefer-stateless-function": 0,
+            "react/jsx-filename-extension": 0,
+            "react/jsx-one-expression-per-line": 0,
+            "no-nested-ternary": 0
+        },
+        "settings": {
+            "react": {
+                "version": "detect"
+            }
         }
     }
 
     ```
 
-    rules는 세부 규칙인데, 일단은 비워두자. 보통 기본 규칙을 무시하고 싶을 때 사용한다.
 * 이제 prettier 설정을 해줘야 한다.  
   프로젝트 폴더에 ```.prettierrc``` 파일을 생성한다. 확장자 없이!
   * 파일을 메모장으로 열어 다음과 같이 입력한다.
-    
-    ```
+
+    ```JSON
     {
-        "endOfLine": "auto" //줄바꿈 처리방식
-        "singleQuote": true, //작은따옴표 사용여부
-        "semi": true, //세미콜론 사용여부
-        "useTabs": false, //탭 사용여부
-        "tabWidth": 2, //탭 길이
-        "trailingComma": "all", //하나의 코드가 여러 줄을 먹을 때 줄바꿈 콤마 사용방식
-        "printWidth": 160, //졸바꿈폭
-        "arrowParens": "always", //화살표함수 괄호사용방식
-        "bracketSpacing": true, //괄호에 공백
+        "singleQuote": true, //작은따옴표로도 문자열 표기 가능
+        "semi": true, //코드 뒤에 세미콜론 붙이기 여부
+        "useTabs": false, //탭키로 들여쓰기. ESLint와 같이 사용시 무조건 false로
+        "tabWidth": 4, //탭 길이(칸 단위)
+        "trailingComma": "all", //배렬이나 키의 맨 뒤에 쉼표를 붙일것인지
+        "printWidth": 160 //한 줄 길이 제한
     }
     ```
 
-  * 이 파일은 prettier 적용 규칙을 나타낸다. 자세한 설명은 [이곳에 친절하게 나와있다.](https://velog.io/@planethoon/.prettierrc-%EA%B8%B0%EB%B3%B8-%EC%84%A4%EC%A0%95)
+  * 이 파일은 prettier 적용 규칙을 나타낸다. 위 외에도 수많은 규칙들이 있는데, 여기서는 타입스크립트 문법에 필요한 기본적인 규칙만 설정해놓기로 한다.
 
-* 그 다음 VSCode를 열어 ```Ctrl+,```으로 설정창에 들어간 후 ```Format On Save```를 검색한다.
-  * 체크박스가 하나 보일텐데, 체크해준다.
+* 위 prettier 설정을 실제 코드에 적용시키려면 VSCode 설정을 뜯어야한다. VSCode를 열어 ```Ctrl+,```으로 설정창에 들어간다.
+  * 설정창에 들어가면 오른쪽 위 아이콘 모음에  
+    ![tsc2-img6](/images/posts/typescript2-img6.png)  
+    이런 아이콘이 있을 것이다.  
+    이것을 클릭하면 설정값들이 JSON 형식으로 저장된 ```settings.json```파일이 열어진다.
+  * 맨 아래에 다음과 같은 항목을 추가한다.  
+    ```JSON
+        ...
+        "editor.formatOnSave": true,
+        "eslint.autoFixOnSave": true,
+        "eslint.alwaysShowStatus": true,
+        "prettier.disableLanguages": [
+            "js"
+        ],
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true
+        }
+    }
+    ```  
+    대충 저장 시 위 prettier 설정에 맞게 형식화해주라는 의미이다.  
+    그리고 prettier 설정은 타입스크립트 대상이므로 자바스크립트는 prettier 비활성화해준다.
 
-* 이제 타입스크립트 파일을 작성할 때 문법 에라가 표시되고, 파일을 저장하면 위 설정대로 코드 양식이 통일화된다!
+* 이제 프로젝트 폴더 내 타입스크립트 파일 하나를 열어보자.
+  * pages/api/hello.ts 파일을 열어보면  
+    ![tsc2-img7](/images/posts/typescript2-img7.png)  
+    이렇게 빨간줄이 가득하다. 타입스크립트 문법에 맞지 않아 ESLint가 빨간줄을 일으킨 것이다.
+  * 만약 여기서 저장을 하면?  
+    ![tsc2-img8](/images/posts/typescript2-img8.png)  
+    prettier에서 지정한 형식에 맞게 코드가 수정된다!  
+    이제 타입스크립트 문법에도 맞으므로 ESLint가 빨간줄을 띄우지 않는다.
+
 ### 컴파일 환경설정
 
 * tsconfig.json을 이렇게 수정해준다.
@@ -163,7 +197,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
         "skipLibCheck": true,
         "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "strict": true,
+        "strict": false,
         "forceConsistentCasingInFileNames": true,
         "noFallthroughCasesInSwitch": true,
         "module": "esnext",
@@ -183,6 +217,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
   * 해당 파일은 타입스크립트 컴파일 설정이다.  
   ```include:[]```는 **컴파일할 파일**을 설정한다. 여기서는 src 내의 모든 파일을 컴파일하도록 했다.
   * 마찬가지로 include에서 컴파일 제외할 파일을 설정해놓는 ```exclude:[]```도 있다. 따로 명시해놓지 않으면 ```exclude:["node_modules", "bower_components", "jspm_packages"]```으로 기본 설정된다.
+  * ```"strict": false```는 형선언 강제 여부이다. 타입스크립트는 형선언을 하는 언어이지만 자바스크립트 기반이라 사실 하지 않아도 된다. 만약 ```true```이면 무조건 변수에 형선언을 해야 한다.
 
 ## NextJS 설치
 
@@ -200,11 +235,8 @@ excerpt : 타입스크립트 클론 코딩-사전준비
     1. .git과 readme.md를 본인 레포지토리의 것으로 덮어씌운다.
     2. ```git add .```으로 변경사항을 전부 추가한다.
     3. ```git commit```과 ```git push```로 레포지토리 반영한다.
-* create-next-app 시 package.json의 dependencies와 devDependencies는 자동으로 설정되었다.
-  * 즉 아까처럼 npm을 사용해 일일이 등록을 안해줘도 된다.
-  * 따라서 eslint 설정은 그냥 ```npx eslint --init```해주고 적절히 셋팅해주자.
-  * 다만 prettier는 수동으로 설치하고 설정해 줘야 한다. eslint-plugin-prettier 및 eslint-config-prettier도 마찬가지이다.
-* 마찬가지로 tsconfig.json도 create-next-app 시 include/exclude 등이 자동 설정되었다.
+* **ESLint 및 prettier** 설정은 위 create-react-app 때와 똑같이 해주자.
+* **tsconfig.json**도 strict 옵션 빼고는 건들지는 말자.
 
 앞으로 프로젝트는 next.js 환경을 전제로 개발해보겠다.
 ![tsc2-img4](/images/posts/typescript2-img4.png)  

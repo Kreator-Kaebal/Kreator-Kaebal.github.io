@@ -37,25 +37,123 @@ excerpt : 타입스크립트 클론 코딩-사전준비
 
 * 프로젝트 폴더에 들어가면 아래와 같은 디렉토리가 나온다.
   * .git 및 readme.md는 본인이 이 프로젝트를 깃허브 레포지토리로 설정해놓아 생긴 것이므로, 없어도 무방하다.
-* 본인이 VSCode를 사용중이고 ESLint[^1]를 사용하고 싶으면  
-  ```npm install -D eslint```
-  을 사용해 eslint를 ```package.json```의 ```devDependencies:{}``` 목록에 추가한다.
-* ```package.json```은 일종의 프로젝트 환경 설정인데, ```dependencies:{}```는 이 프로젝트를 **실행하기 위해 필요**한 모듈들, ```devDependencies:{}```는 **개발할 때만 사용**하는 npm 모듈을 모아놓는 곳이다.
-  * ```npm install```로 모듈을 설치하면 기본적으로 ```dependencies:{}```에 추가된다. 만약 배포에는 필요 없고 개발할때만 사용할 모듈이 필요하면 ```npm install -D```로 해주면 된다.
-  * 그 다음 ```npx eslint --init```으로 프로젝트 eslint의 설정을 한다.  
-  이 때  
-  ```√ Does your project use TypeScript? · No / Yes```,  
-  ```√ Would you like to install them now with npm?```  
-  에는 반드시 **Yes**를 체크해줘야 한다.  
-  프로젝트가 타입스크립트 사용하냐는 질문과, 이전 질문에서 설정한 eslint 포맷을 npm -D 설치할지 물어보는 질문이다.  
-  * 이렇게 하면 프로젝트 폴더에 ```eslintrc.json```이 생성된다.  
-  ```√ What format do you want your config file to be in?```질문에 어떻게 답변했는가에 따라 확장자가 달라질 수 있다.  
-  어쨌든 이 파일은 eslint 설정을 담는 파일이다.
+
+### 개발 보조모듈 설치
+
+[여기를 참고했습니다](https://velog.io/@junghyeonsu/React-create-react-app-Typescript-%EC%B4%88%EA%B8%B0-%EC%84%B8%ED%8C%85-%EC%99%84%EB%B2%BD-%EC%A0%95%EB%A6%AC)
+
+난잡한 코드 형식을 통일화해주는 **Prettier**을 설치해보자.  
+
+* 일단 VSCode에서 Prettier 확장 프로그램을 설치한다.
+* 그 다음 프로젝트 디렉토리에서 콘솔창을 열고,  
+  ```npm i prettier -D -E```  
+  으로 프로젝트에 prettier 모듈을 설치한다.
+  * -D 옵션은 **devDependencies 전용**을 뜻한다.
+    * ```package.json``` 파일에는 ```dependencies```와 ```devDependencies```라는 JSON 키가 있는데, 이들은 파이썬의 requirements.txt 같이 이 프로젝트를 실행하기 위해 필요한 모듈 정보들을 담고 있다.
+    * dependencies는 **실제 배포에 필요한**, devDependencies는 **개발 단계에만 필요한** 모듈을 놓는다.
+    * 보통 모듈을 설치하면 dependencies에 들어가는데, -D 옵션을 주면 대신 devDependencies에 들어간다.
+  * -E 옵션은 **버전 고정**을 뜻한다. 이렇게 하면 dependencies에 이 버전 이하도 이상도 아닌 정확한 버전으로 설치되도록 설정된다.
+    * 참고로 dependencies를 보면 보통은 ^(버전명) 이렇게 되어 있는데, 이는 *이 버전 이상으로 설치*하라는 의미이다.
+* ```create-react-app```으로 생성한 리액트 프로젝트에는 **ESLint**[^1]라는 모듈이 기본적으로 깔려 있다.
+  * ESLint는 플러그인과 설정이라는 것으로 구성되어 있으며, 이 둘을 적절히 선택할 수 있다.
+  * Prettier와 ESLint를 그대로 같이 사용하면 모듈 충돌이 일어나므로, 충돌을 막아주는 ESLint 플러그인과 설정인  
+  ```npm i eslint-plugin-prettier eslint-config-prettier -D```  
+  를 설치해준다.
+  * 또한  
+    ```npm i eslint -D```  
+    로 eslint를 devDependencies로 보내야 한다.
+  * package.json을 열어서 devDependencies가 위와 같으면 잘 따라왔다.  
+    ![tsc2-img5](/images/posts/typescript2-img5.png)
+* 이제 ESLint 설정을 해줘야 한다. 프로젝트 폴더에서  
+  ```npx eslint --init```  
+  을 실행시키고, 아래와 같이 선택한다.  
+  
+  > ? How would you like to use ESLint?
+  > **To check syntax, find problems, and enforce code style**
+  > ? What type of modules does your project use?
+  > **JavaScript modules (import/export)**
+  > ? Which framework does your project use?
+  > **React**
+  > ? Does your project use TypeScript?
+  > **Yes**
+  > ? Where does your code run?
+  > **Browser**
+  > ? How would you like to define a style for your project?
+  > **Use a popular style guide**
+  > ? Which style guide do you want to follow?
+  > **Airbnb: <https://github.com/airbnb/javascript>**
+  > (이거는 취향 차이긴 한데, 보통 Airbnb를 가장 많이 사용한다.)
+  > ? What format do you want your config file to be in?
+  > **JSON**
+  > ? Would you like to install them now with npm?
+  > **Yes**
+
+* 설정이 끝나면 폴더에 ```.eslintrc.json```이 생길 것이다. 이 파일이 ESLint 설정을 담고 있는 곳인데, 아래와 같이 바꿔준다.
+
+    ```
+    {
+        "env": {
+            "browser": true,
+            "es2021": true,
+            "node": true
+        },
+        "extends": [
+            "plugin:react/recommended",
+            "airbnb",
+            "plugin:@typescript-eslint/recommended",
+            "plugin:prettier/recommended"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+            "ecmaFeatures": {
+                "jsx": true
+            },
+            "ecmaVersion": "latest",
+            "sourceType": "module"
+        },
+        "plugins": [
+            "react",
+            "@typescript-eslint",
+            "prettier"
+        ],
+        "rules": {
+        }
+    }
+
+    ```
+
+    rules는 세부 규칙인데, 일단은 비워두자. 보통 기본 규칙을 무시하고 싶을 때 사용한다.
+* 이제 prettier 설정을 해줘야 한다.  
+  프로젝트 폴더에 ```.prettierrc``` 파일을 생성한다. 확장자 없이!
+  * 파일을 메모장으로 열어 다음과 같이 입력한다.
+    
+    ```
+    {
+        "endOfLine": "auto" //줄바꿈 처리방식
+        "singleQuote": true, //작은따옴표 사용여부
+        "semi": true, //세미콜론 사용여부
+        "useTabs": false, //탭 사용여부
+        "tabWidth": 2, //탭 길이
+        "trailingComma": "all", //하나의 코드가 여러 줄을 먹을 때 줄바꿈 콤마 사용방식
+        "printWidth": 160, //졸바꿈폭
+        "arrowParens": "always", //화살표함수 괄호사용방식
+        "bracketSpacing": true, //괄호에 공백
+    }
+    ```
+
+  * 이 파일은 prettier 적용 규칙을 나타낸다. 자세한 설명은 [이곳에 친절하게 나와있다.](https://velog.io/@planethoon/.prettierrc-%EA%B8%B0%EB%B3%B8-%EC%84%A4%EC%A0%95)
+
+* 그 다음 VSCode를 열어 ```Ctrl+,```으로 설정창에 들어간 후 ```Format On Save```를 검색한다.
+  * 체크박스가 하나 보일텐데, 체크해준다.
+
+* 이제 타입스크립트 파일을 작성할 때 문법 에라가 표시되고, 파일을 저장하면 위 설정대로 코드 양식이 통일화된다!
+### 컴파일 환경설정
+
 * tsconfig.json을 이렇게 수정해준다.
   ```
   {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es5",
         "lib": [
             "dom",
             "dom.iterable",
@@ -85,7 +183,6 @@ excerpt : 타입스크립트 클론 코딩-사전준비
   * 해당 파일은 타입스크립트 컴파일 설정이다.  
   ```include:[]```는 **컴파일할 파일**을 설정한다. 여기서는 src 내의 모든 파일을 컴파일하도록 했다.
   * 마찬가지로 include에서 컴파일 제외할 파일을 설정해놓는 ```exclude:[]```도 있다. 따로 명시해놓지 않으면 ```exclude:["node_modules", "bower_components", "jspm_packages"]```으로 기본 설정된다.
-  * ```"target": "es6"```은 **어떤 자바스크립트 문법으로 컴파일**할 것인가를 설정한다. 기본 es5를 최신 문법인 es6으로 바꾸었다.
 
 ## NextJS 설치
 
@@ -94,7 +191,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
 만약 본인이 Node.js 대신 **Next.js**를 사용하고 싶다면...  
 
 * 프로젝트를 새로 생성한다.
-  * 이 때 ```npx create-next-app pseudo-webside --typescript``` 이렇게 생성하자.
+  * 이 때 ```npx create-next-app 프로젝트명 --typescript``` 이렇게 생성하자.
 * 프로젝트가 생성되었으면 디렉토리로 이동해 ```npm run dev```으로 실행한다.
   * ![tsc2-img3](/images/posts/typescript2-img3.png)  
     실행 후 프로젝트 디렉토리는 이렇게 생겼다.  
@@ -106,8 +203,8 @@ excerpt : 타입스크립트 클론 코딩-사전준비
 * create-next-app 시 package.json의 dependencies와 devDependencies는 자동으로 설정되었다.
   * 즉 아까처럼 npm을 사용해 일일이 등록을 안해줘도 된다.
   * 따라서 eslint 설정은 그냥 ```npx eslint --init```해주고 적절히 셋팅해주자.
-* 마찬가지로 tsconfig.json도 create-next-app 시 자동 설정되었다.
-  * ```"target": "es5"``` 항목만 es6으로 바꿔주자.
+  * 다만 prettier는 수동으로 설치하고 설정해 줘야 한다. eslint-plugin-prettier 및 eslint-config-prettier도 마찬가지이다.
+* 마찬가지로 tsconfig.json도 create-next-app 시 include/exclude 등이 자동 설정되었다.
 
 앞으로 프로젝트는 next.js 환경을 전제로 개발해보겠다.
 ![tsc2-img4](/images/posts/typescript2-img4.png)  

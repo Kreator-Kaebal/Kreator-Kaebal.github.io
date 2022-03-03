@@ -51,7 +51,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
   * -D 옵션은 **devDependencies 전용**을 뜻한다.
     * ```package.json``` 파일에는 ```dependencies```와 ```devDependencies```라는 JSON 키가 있는데, 이들은 파이썬의 requirements.txt 같이 이 프로젝트를 실행하기 위해 필요한 모듈 정보들을 담고 있다.
     * dependencies는 **실제 배포에 필요한**, devDependencies는 **개발 단계에만 필요한** 모듈을 놓는다.
-    * 모듈을 설치할 때 ```--save``` 옵션을 주면 dependencies에 들어가는데, ```-D``` 옵션을 주면 대신 devDependencies에 들어간다.
+    * 모듈을 설치하면 dependencies에 들어가는데, ```-D``` 옵션을 주면 대신 devDependencies에 들어간다.
   * -E 옵션은 **버전 고정**을 뜻한다. 이렇게 하면 dependencies에 이 버전 이하도 이상도 아닌 정확한 버전으로 설치되도록 설정된다.
     * 참고로 dependencies를 보면 보통은 ^(버전명) 이렇게 되어 있는데, 이는 *이 버전 이상으로 설치*하라는 의미이다.
 * ```create-react-app```으로 생성한 리액트 프로젝트에는 **ESLint**[^1]라는 모듈이 기본적으로 깔려 있다.

@@ -144,7 +144,8 @@ excerpt : 타입스크립트 클론 코딩-사전준비
         "useTabs": false, //탭키로 들여쓰기. ESLint와 같이 사용시 무조건 false로
         "tabWidth": 4, //탭 길이(칸 단위)
         "trailingComma": "all", //배렬이나 키의 맨 뒤에 쉼표를 붙일것인지
-        "printWidth": 160 //한 줄 길이 제한
+        "printWidth": 160, //한 줄 길이 제한
+        "endOfLine": "auto" //줄바꿈 방식(CRLF 또는 LF)-운영체제에 따라 달라요
     }
     ```
 
@@ -159,11 +160,10 @@ excerpt : 타입스크립트 클론 코딩-사전준비
     ```JSON
         ...
         "editor.formatOnSave": true,
-        "eslint.autoFixOnSave": true,
         "eslint.alwaysShowStatus": true,
-        "prettier.disableLanguages": [
-            "js"
-        ],
+        "[javascript]": {
+            "editor.formatOnSave": false
+        },
         "editor.codeActionsOnSave": {
             "source.fixAll.eslint": true
         }

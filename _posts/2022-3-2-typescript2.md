@@ -32,7 +32,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
 
 ## 프로젝트 설정
 
-[여기를 한번 참조해보자](https://create-react-app.dev/docs/adding-typescript/)
+[여기를 한번 참조해보자](https://create-react-app.dev/docs/adding-typescript/)  
 ![tsc2-img2](/images/posts/typescript2-img2.png)  
 
 * 프로젝트 폴더에 들어가면 아래와 같은 디렉토리가 나온다.
@@ -51,7 +51,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
   * -D 옵션은 **devDependencies 전용**을 뜻한다.
     * ```package.json``` 파일에는 ```dependencies```와 ```devDependencies```라는 JSON 키가 있는데, 이들은 파이썬의 requirements.txt 같이 이 프로젝트를 실행하기 위해 필요한 모듈 정보들을 담고 있다.
     * dependencies는 **실제 배포에 필요한**, devDependencies는 **개발 단계에만 필요한** 모듈을 놓는다.
-    * 보통 모듈을 설치하면 dependencies에 들어가는데, -D 옵션을 주면 대신 devDependencies에 들어간다.
+    * 모듈을 설치할 때 ```--save``` 옵션을 주면 dependencies에 들어가는데, ```-D``` 옵션을 주면 대신 devDependencies에 들어간다.
   * -E 옵션은 **버전 고정**을 뜻한다. 이렇게 하면 dependencies에 이 버전 이하도 이상도 아닌 정확한 버전으로 설치되도록 설정된다.
     * 참고로 dependencies를 보면 보통은 ^(버전명) 이렇게 되어 있는데, 이는 *이 버전 이상으로 설치*하라는 의미이다.
 * ```create-react-app```으로 생성한 리액트 프로젝트에는 **ESLint**[^1]라는 모듈이 기본적으로 깔려 있다.
@@ -67,25 +67,25 @@ excerpt : 타입스크립트 클론 코딩-사전준비
   ```npx eslint --init```  
   을 실행시키고, 아래와 같이 선택한다.  
   
-  > ? How would you like to use ESLint?
-  > **To check syntax, find problems, and enforce code style**
-  > ? What type of modules does your project use?
-  > **JavaScript modules (import/export)**
-  > ? Which framework does your project use?
-  > **React**
-  > ? Does your project use TypeScript?
-  > **Yes**
-  > ? Where does your code run?
-  > **Browser**
-  > ? How would you like to define a style for your project?
-  > **Use a popular style guide**
-  > ? Which style guide do you want to follow?
-  > **Airbnb: <https://github.com/airbnb/javascript>**
-  > (이거는 취향 차이긴 한데, 보통 Airbnb를 가장 많이 사용한다.)
-  > ? What format do you want your config file to be in?
-  > **JSON**
-  > ? Would you like to install them now with npm?
-  > **Yes**
+  > ? How would you like to use ESLint?  
+  > **To check syntax, find problems, and enforce code style**  
+  > ? What type of modules does your project use?  
+  > **JavaScript modules (import/export)**  
+  > ? Which framework does your project use?  
+  > **React**  
+  > ? Does your project use TypeScript?  
+  > **Yes**  
+  > ? Where does your code run?  
+  > **Browser**  
+  > ? How would you like to define a style for your project?  
+  > **Use a popular style guide**  
+  > ? Which style guide do you want to follow?  
+  > **Airbnb: <https://github.com/airbnb/javascript>**  
+  > (이거는 취향 차이긴 한데, 보통 Airbnb를 가장 많이 사용한다.)  
+  > ? What format do you want your config file to be in?  
+  > **JSON**  
+  > ? Would you like to install them now with npm?  
+  > **Yes**  
 
 * 설정이 끝나면 폴더에 ```.eslintrc.json```이 생길 것이다. 이 파일이 ESLint 설정을 담고 있는 곳인데, 아래와 같이 바꿔준다.  
 대충 ESLint가 체크하는 언어를 타입스크립트로 하고, prettier를 연동한다는 말이다.
@@ -157,6 +157,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
     이런 아이콘이 있을 것이다.  
     이것을 클릭하면 설정값들이 JSON 형식으로 저장된 ```settings.json```파일이 열어진다.
   * 맨 아래에 다음과 같은 항목을 추가한다.  
+
     ```JSON
         ...
         "editor.formatOnSave": true,
@@ -169,6 +170,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
         }
     }
     ```  
+
     대충 저장 시 위 prettier 설정에 맞게 형식화해주라는 의미이다.  
     그리고 prettier 설정은 타입스크립트 대상이므로 자바스크립트는 prettier 비활성화해준다.
 
@@ -184,7 +186,8 @@ excerpt : 타입스크립트 클론 코딩-사전준비
 ### 컴파일 환경설정
 
 * tsconfig.json을 이렇게 수정해준다.
-  ```
+
+  ```JSON
   {
     "compilerOptions": {
         "target": "es5",

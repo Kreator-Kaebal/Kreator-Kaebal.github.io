@@ -104,7 +104,7 @@ excerpt : 타입스크립트 클론 코딩-사전준비
         ],
         "parser": "@typescript-eslint/parser",
         "parserOptions": {
-            "project": ".tsconfig.json",
+            "project": "./tsconfig.json",
             "ecmaFeatures": {
                 "jsx": true
             },
@@ -245,4 +245,5 @@ excerpt : 타입스크립트 클론 코딩-사전준비
 ![tsc2-img4](/images/posts/typescript2-img4.png)  
 다음 시간에 계속...
 
+---
 [^1]: 자바스크립트 코드 문법을 체크해주는 확장 기능이다.

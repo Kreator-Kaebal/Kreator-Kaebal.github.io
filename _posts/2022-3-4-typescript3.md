@@ -5,7 +5,7 @@ tags: [java/typescript, react]
 excerpt: 메모장 서비스 만들기-기본 설정과 firebase 연동까지
 ---
 
-# Next.js와 파이어베이스 연동
+## Next.js와 파이어베이스 연동
 
 이번 시간에는 구글에서 제공하는 모바일 및 앱 개발 api[^1] 서비스인 파이어베이스를 Next.js에 연동하여 간단한 메모장 서비스를 구현해보겠다.
 

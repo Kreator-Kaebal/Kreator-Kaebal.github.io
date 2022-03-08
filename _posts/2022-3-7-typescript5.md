@@ -295,7 +295,7 @@ const getAlert = async () => {
       to: `${token}`,
       notification: {
         title: "Tosso",
-        body: "Tissi",
+        body: singleTosso.desc,
       },
     },
   });

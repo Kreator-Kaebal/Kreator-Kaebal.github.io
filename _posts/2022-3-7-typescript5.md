@@ -78,32 +78,6 @@ export default initToken;
 파이어베이스 api의 getMessaging() 객체와 아까 받아온 키를 getToken에 넣으면 토큰이 생성되는 원리이다!  
 getMessaging()의 괄호 안에는 firebaseConfig에서 생성한 initializeApp 객체를 넣어주면 된다.
 
-### 백그라운드 설정
-
-백그라운드에서 알림을 받을 수 있도록 추가 설정이 필요하다.  
-프로젝트의 **public** 폴더에 **firebase-messaging-sw.js** 파일을 생성한다.  
-주의할 점은, **반드시** public 폴더에 위와 똑같은 이름으로 넣어야 한다. 타입스크립트가 아니라 자바스크립트이다!
-
-이 파일은 _백그라운드에서 알림을 받기 위해_ 필요한 파일이다. 프로젝트 실행시 파이어베이스 모듈이 알아서 찾아 실행해준다.
-
-```javascript
-importScripts("https://www.gstatic.com/firebasejs/8.1.0/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/8.1.0/firebase-messaging.js");
-
-const config = {
-  //firebaseConfig에 있는 것과 똑같이
-};
-firebase.initializeApp(config);
-
-const messaging = firebase.messaging();
-```
-
-여기서 중요한 것은 import를 쓰지 않고 importScripts를 쓴다는 것인데,  
-public 폴더는 프로젝트 모듈에 포함되지 않기 때문에  
-`import initializeApp from 'firebase/app'` 등을 사용하면 실행시 오류가 난다.  
-또한 타입스크립트는 importScripts를 읽기 못하기 때문에 자바스크립트로 사용해야 한다.  
-importScripts를 보면 `firebasejs/8.1.0` 이렇게 나와있는데 **9 버전 이상**으로 설정하면 gstatic.com에 없다는 오류가 나온다. 8 버전으로 해주자.
-
 ### 앱 설정
 
 **\_app.tsx**[^2]의 MyApp 함수 안에 다음과 같은 코드를 써주자.  
@@ -264,7 +238,9 @@ export var serkey = firebaseServerKey;
 그 다음 TossoDetails.tsx로 이동하여
 
 ```html
-<h2 onClick="{getAlert}">{singleTosso.title}</h2>
+<button onClick="{getAlert}">
+  <h2>{(singleTosso as any).title}</h2>
+</button>
 ```
 
 onClick 옵션을 추가하고 getAlert 함수를 구현해야 한다.  
@@ -272,7 +248,7 @@ return 앞에
 
 ```javascript
 // 임포트 추가
-import { app, database, serkey } from "../../firebase/firebaseConfig";
+import { database, serkey } from "../../firebase/firebaseConfig";
 import axios from "axios";
 
 //_app.tsx에서 만든 tokens 콜렉션 불러오기
@@ -295,7 +271,7 @@ const getAlert = async () => {
       to: `${token}`,
       notification: {
         title: "Tosso",
-        body: `${singleTosso.desc}`,
+        body: `${(singleTosso as any).desc}`,
       },
     },
   });

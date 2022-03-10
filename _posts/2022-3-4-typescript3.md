@@ -47,65 +47,75 @@ npx eslint --init
 
 초기설정 후
 
-```json
-{
-  "env": {
-    "browser": true,
-    "es2021": true
+```javascript
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
   },
-  "extends": [
+  extends: [
     "plugin:react/recommended",
     "airbnb",
     "airbnb-typescript",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
   ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json",
-    "ecmaFeatures": {
-      "jsx": true
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    project: ["./tsconfig.eslint.json", "./tsconfig.json"],
+    tsconfigRootDir: __dirname,
+    ecmaFeatures: {
+      jsx: true,
     },
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
-  "plugins": ["react", "@typescript-eslint"],
-  "rules": {
-    "arrow-body-style": ["always"],
+  plugins: ["react", "@typescript-eslint"],
+  rules: {
+    "arrow-body-style": ["error", "always"],
+    "jsx-a11y/anchor-is-valid": 0,
+    "react/button-has-type": 0,
+    "react/function-component-definition": ["off"],
     "react/react-in-jsx-scope": 0,
     "react/prefer-stateless-function": 0,
+    "react/jsx-no-bind": 0,
+    "react/jsx-no-useless-fragment": 0,
     "react/jsx-one-expression-per-line": 0,
+    "react/jsx-props-no-spreading": 0,
     "no-nested-ternary": 0,
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "no-use-before-define": ["off"],
     "react/jsx-filename-extension": [
       2,
       {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+      },
     ],
     "import/extensions": [
       2,
       "ignorePackages",
       {
-        "js": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-    "prettier/prettier": "error"
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"],
-        "moduleDirectory": ["node_modules", "@types"]
+        js: "never",
+        jsx: "never",
+        ts: "never",
+        tsx: "never",
       },
-      "typescript": {}
-    }
-  }
-}
+    ],
+    "prettier/prettier": "error",
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        moduleDirectory: ["node_modules", "@types"],
+      },
+      typescript: {},
+    },
+  },
+};
 ```
 
-으로 .eslintrc.json 설정
+으로 .eslintrc.js 설정
 
 prettier 설정
 
@@ -136,7 +146,6 @@ settings.json 설정(VSCode)
   "editor.formatOnSave": true,
   "eslint.alwaysShowStatus": true,
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
   "editor.codeActionsOnSave": {
@@ -202,11 +211,10 @@ firebase는 당연히 파이어베이스 사용에 필요하고, react-quill은 
 프로젝트 폴더의 **pages/index.tsx**를 다음과 같이 수정한다.
 
 ```javascript
-import type { NextPage } from "next";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -388,12 +396,12 @@ NoSQL 데이터베이스는 말 그대로 SQL 명령어를 사용하지 않는 �
 
 ```javascript
 import { useState, useEffect } from "react";
-import { app, database } from "../../firebase/firebaseConfig";
+import { database } from "../../firebase/firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 ```
 
 을 추가한다.  
-대충 app,database는 파이어베이스를 연동하기 위해 필요한 것이고,
+대충 database는 파이어베이스를 연동하기 위해 필요한 것이고,
 collection,addDoc,getDocs는 파이어스토어의 콜렉션을 불러오고, 콜렉션 내 문서 CRUD를 위해 필요하다 보면 된다.
 
 useState, useEffect 는 리액트의 핵심 기능으로, 코드를 보며 설명하겠다.

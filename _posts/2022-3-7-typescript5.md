@@ -139,7 +139,7 @@ useEffect(function () {
 ### 토큰 받기
 
 npm run dev으로 접속한다.  
-fcm 토큰을 받으려면 **https** 연결이 필수이므로 [ngork](https://ngrok.com/) 등을 통해 실행한 서버 주소를 https로 재접속한다.
+fcm 토큰을 받으려면 로컬호스트로 접속하면 된다. 또는 http**s** 연결을 해도 되는데 npm run dev에서 제공하는 url은 http이므로 [ngork](https://ngrok.com/) 등을 통해 실행한 서버 주소를 https로 재접속한다.
 
 웹 콘솔창(`F12`)를 열어 _콘솔_ 항목에 접속해보면  
 ![tsc5-img4](/images/posts/typescript5-img4.png)

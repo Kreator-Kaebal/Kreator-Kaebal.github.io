@@ -44,20 +44,20 @@ REST 형태[^2]가 무엇이냐면, 예전에 잠깐 언급했지만 구성을 _
 여기서 URI와 HTTP를 간략하게 살펴보자면,
 
 - URI에는 양식이 있다. 그냥 주소창에 아무렇게나 치면 에러 나는 것처럼 일정한 형태를 지켜줘야 한다.
-  - **http://www.tosso.com:8080/tissi/tussu.html?key1=value1&key2=value2#tukchongjijom**
+  - **<span style="color:yellow">http://</span><span style="color:blue">www.tosso.com</span><span style="color:green">:8080</span><span style="color:orange">/tissi/tussu.html</span><span style="color:red">?key1=value1&key2=value2</span><span style="color:purple">#tukchongjijom</span>**
   - 위 주소는 모든 URI 양식이 들어있는 주소이다.
-  - **http://** 는 통신 규격을 나타낸다.
+  - **<span style="color:yellow">http://</span>** 는 통신 규격을 나타낸다.
     - 보통 http://나 https://를 많이 쓴다.
-  - **www.tosso.com**은 도메인을 나타낸다.
-  - **:8080**은 포트를 나타낸다.
+  - **<span style="color:blue">www.tosso.com</span>**은 도메인을 나타낸다.
+  - **<span style="color:green">:8080</span>**은 포트를 나타낸다.
     - **:**으로 시작해야 한다.
-  - **/tissi/tussu.html**은 자원 경로를 나타낸다.
+  - **<span style="color:orange">/tissi/tussu.html</span>**은 자원 경로를 나타낸다.
     - **/**으로 시작해야 한다.
     - 참고로 위(~.html)처럼 실제 자원 위치까지 나타내는 URI는 *URL*이라고 한다.
-  - **?key1=value1&key2=value2**는 파라메타를 나타낸다.
+  - **<span style="color:red">?key1=value1&key2=value2</span>**는 파라메타를 나타낸다.
     - **?**으로 시작하고, **&**으로 각 파라메타를 구분할 수 있다.
     - 파라메타는 URI를 함수라고 생각할 때 함수 인자라고 보면 된다.
-  - **#tukchongjijom**는 ~~해쉬태그~~ 앵커(anchor)라는, 자원의 특정 지점을 나타낸다.
+  - **<span style="color:purple">#tukchongjijom</span>**는 ~~해쉬태그~~ 앵커(anchor)라는, 자원의 특정 지점을 나타낸다.
     - **#**으로 시작해야 한다.
     - 위키백과의 '해당 목차로 이동'이나, 유튜브의 '해당 시간으로 이동' 같은 기능은 이 앵커를 활용한 것이다.
 - HTTP는 **요청-응답** 형식으로 소통하는 통신 규격이다.

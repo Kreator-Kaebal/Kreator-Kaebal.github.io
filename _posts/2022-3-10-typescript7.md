@@ -39,12 +39,12 @@ print(time.time())
 ### REST API
 
 REST API는 API의 한 종류로, **REST 형태로 제공**되는 API를 말하는 것이다.  
-REST 형태[^2]가 무엇이냐면, 예전에 잠깐 언급했지만 구성을 웹 주소(URI) 형태로, 통신을 _HTTP_ 규격으로 사용한다는 것을 의미한다.
+REST 형태[^2]가 무엇이냐면, 예전에 잠깐 언급했지만 구성을 _웹 주소(URI)_ 형태로, 통신을 _HTTP_ 규격으로 사용한다는 것을 의미한다.
 
 여기서 URI와 HTTP를 간략하게 살펴보자면,
 
 - URI에는 양식이 있다. 그냥 주소창에 아무렇게나 치면 에러 나는 것처럼 일정한 형태를 지켜줘야 한다.
-  - http://www.tosso.com:8080/tissi/tussu.html?key1=value1&key2=value2#SomewhereInTheDocument
+  - **http://www.tosso.com:8080/tissi/tussu.html?key1=value1&key2=value2#tukchongjijom**
   - 위 주소는 모든 URI 양식이 들어있는 주소이다.
   - **http://** 는 통신 규격을 나타낸다.
     - 보통 http://나 https://를 많이 쓴다.
@@ -57,7 +57,7 @@ REST 형태[^2]가 무엇이냐면, 예전에 잠깐 언급했지만 구성을 �
   - **?key1=value1&key2=value2**는 파라메타를 나타낸다.
     - **?**으로 시작하고, **&**으로 각 파라메타를 구분할 수 있다.
     - 파라메타는 URI를 함수라고 생각할 때 함수 인자라고 보면 된다.
-  - **#SomewhereInTheDocument**는 앵커(anchor)라는, 자원의 특정 지점을 나타낸다.
+  - **#tukchongjijom**는 ~~해쉬태그~~ 앵커(anchor)라는, 자원의 특정 지점을 나타낸다.
     - **#**으로 시작해야 한다.
     - 위키백과의 '해당 목차로 이동'이나, 유튜브의 '해당 시간으로 이동' 같은 기능은 이 앵커를 활용한 것이다.
 - HTTP는 **요청-응답** 형식으로 소통하는 통신 규격이다.

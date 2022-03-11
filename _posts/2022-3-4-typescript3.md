@@ -115,7 +115,19 @@ module.exports = {
 };
 ```
 
-으로 .eslintrc.js 설정
+으로 .eslintrc.js 설정  
+대충 eslint 에라가 발생하지 않도록 규칙을 설정한것이다.  
+참고로 eslint가 귀찮으면 이 과정을 빼고 해도 된다. 물론 아래 prettier도 마찬가지
+
+프로젝트 폴더에 tsconfig.eslint.json 추가
+
+```json
+{
+  "include": [".eslintrc.js"]
+}
+```
+
+tsconfig.json의 include 항목에 `.eslintrc.js` 추가
 
 prettier 설정
 

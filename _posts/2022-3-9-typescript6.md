@@ -28,8 +28,7 @@ excerpt: 메모장 서비스 만들기-node.express로 서버구현
 
 ![tsc6-img1](/images/posts/typescript6-img1.png)
 
-대충 이런 식으로 작동된다고 한다.  
-참고로 인터넷 검색으로 나오는 **프론트/백 엔드**는 클라이언트와 서버의 유식한 표현이라고 생각하면 좋다.
+대충 이런 식으로 작동된다고 한다.
 
 ## node.express 서버 구축
 

@@ -47,7 +47,7 @@ import { app, clikey } from "../../firebase/firebaseConfig";
 // 토큰 생성
 const initToken = async () => {
   // firebaseConfig에서 생성한 initApp 객체로 메세징 객체-messaging 생성
-  const messaging = getMessaging(app);
+  const messaging = getMessaging();
   // 메세징 객체와 파이어베이스 키페어(clikey)로 토큰받기
   // getToken이 함수이므로 token 객체로 리턴값 저장
   // 참고로 getToken은 프로미스 객체를 리턴하므로 값을 받기 위해 await 써주기
@@ -75,7 +75,7 @@ export default initToken;
 
 이 코드는 **fcm 메세지 전송에 필요한 토큰**을 생성하는 코드이다.  
 토큰은 각 클라이언트가 고유한 값을 가지며, 토큰을 바탕으로 어디에 메세지를 보낼지 결정할 수 있다.  
-파이어베이스 api의 getMessaging() 객체와 아까 받아온 키를 getToken에 넣으면 토큰이 생성되는 원리이다!  
+파이어베이스 api의 getMessaging() 객체와 아까 받아온 키를 getToken()에 넣으면 토큰이 생성되는 원리이다!  
 getMessaging()의 괄호 안에는 firebaseConfig에서 생성한 initializeApp 객체를 넣어주면 된다.
 
 ### 앱 설정
@@ -141,7 +141,42 @@ useEffect(function () {
 npm run dev으로 접속한다.  
 fcm 토큰을 받으려면 로컬호스트로 접속하면 된다. 또는 http**s** 연결을 해도 되는데 npm run dev에서 제공하는 url은 http이므로 [ngork](https://ngrok.com/) 등을 통해 실행한 서버 주소를 https로 재접속한다.
 
-웹 콘솔창(`F12`)를 열어 _콘솔_ 항목에 접속해보면  
+웹 콘솔창(`F12`)를 열어 _콘솔_ 항목에 접속해보면
+
+```
+An error occurred while retrieving token. FirebaseError: Messaging: We are unable to register the default service worker. Failed to register a ServiceWorker for scope ('http://localhost:3000/firebase-cloud-messaging-push-scope') with script ('http://localhost:3000/firebase-messaging-sw.js'): A bad HTTP response code (404) was received when fetching the script. (messaging/failed-service-worker-registration).
+    at registerDefaultSw (index.esm2017.js?5183:819:1)
+    at async updateSwReg (index.esm2017.js?5183:843:1)
+    at async getToken$1 (index.esm2017.js?5183:906:1)
+```
+
+이렇게 에러가 뜬다...  
+이는 messaging_get_token.ts에서 사용한 getToken() 함수가 프로젝트에서 **firebase-messaging-sw.js** 파일을 찾기 때문이다.  
+`with script ('http://localhost:3000/firebase-messaging-sw.js')` 이 구문을 보면, getToken() 함수는 localhost:3000/, 즉 주소의 최상단(루트)에서 파일을 찾는다.  
+next.js에서는 **public** 폴더 내에 파일을 저장하면 주소의 최상단에서 바로 접근 가능하므로,  
+public 폴더 내에 firebase-messaging-sw.js 파일을 생성하자.
+
+어쨌든 파일을 만들어준 후, 다음과 같이 작성한다.
+
+```javascript
+importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
+importScripts(
+	'https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js',
+);
+
+firebase.initializeApp({
+  (firebaseConfig.ts에 있는 것과 동일)
+});
+
+const messaging = firebase.messaging();
+```
+
+참고로 웹 버전 9로 하면 오류가 나기 때문에 다음과 같이 웹 버전 8로 하였다.  
+웹 버전 9와 8의 차이는 import {...} from "..."로 하느냐, importScripts(...)로 하느냐 등이 있다.  
+이 파일을 제외한 대부분의 파일들은 웹 버전 9로 작성했다고 보면 된다.
+
+이렇게 파일을 만든 다음, 다시 실행해보면
+
 ![tsc5-img4](/images/posts/typescript5-img4.png)
 
 이런 식으로 토큰이 하나 나올 것이다.  
@@ -183,7 +218,7 @@ import { getMessaging, onMessage } from "firebase/messaging";
 import { app } from "../../firebase/firebaseConfig";
 
 const initMessage = () => {
-  const messaging = getMessaging(app);
+  const messaging = getMessaging();
   onMessage(messaging, (payload) => {
     console.log(payload.notification.title);
     console.log(payload.notification.body);

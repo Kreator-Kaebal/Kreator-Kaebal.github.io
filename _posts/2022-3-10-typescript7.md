@@ -66,8 +66,8 @@ REST 형태[^2]가 무엇이냐면, 예전에 잠깐 언급했지만 구성을 _
     - 시작(Start Line): HTTP 메쏘드(요청), HTTP 응답코드(응답) 등이 들어간다.
       - 메쏘드는 GET,POST 등이, 응답코드에는 200,404,501 등이 있다.
     - 헤더(Header): 요청의 전체 특징이 들어간다.
-      - 바디의 형태(Content-Type), 인증키(Authorization) 등이 있다.
-    - 바디(Body): 요청의 내용이 들어간다.
+      - 보디의 형태(Content-Type), 인증키(Authorization) 등이 있다.
+    - 보디(Body): 요청의 내용이 들어간다.
       - 서버에 전달할 데이터는 여기나 URI 파라메타에 넣는다.
 
 [매우 자세한 설명은 여기에](https://developer.mozilla.org/ko/docs/Web/HTTP/Overview)

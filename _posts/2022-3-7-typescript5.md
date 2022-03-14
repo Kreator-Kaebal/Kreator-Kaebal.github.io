@@ -278,7 +278,8 @@ const getAlert = async () => {
 };
 ```
 
-이러고 한번 실행해보자.
+이러고 한번 실행해보자.  
+axios가 뭐고 그 아래 값들이 무엇인지는 [여기](https://kreator-kaebal.github.io/typescript7/)를 참고하라.
 
 ![tsc5-img13](/images/posts/typescript5-img13.png)  
 빨간색 체크된 부분(제목)을 클릭하면...  

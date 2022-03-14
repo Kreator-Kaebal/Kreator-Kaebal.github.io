@@ -199,7 +199,9 @@ const getAlert = async () => {
   // 토큰과 받고싶은 메세지를 요청의 Body에 담아 POST전송
   axios({
     url: "http://localhost:8080/fcm",
+    // 시작 부분
     method: "POST",
+    // 보디
     data: {
       token: `${token}`,
       message: "tosso",
@@ -217,6 +219,8 @@ server.ts에 옮겨놓은 함수를 적절히 가공하자.
 import axios from "axios"
 
 ...
+const serkey=(옮긴 서버키)
+...
 
 // express.json()이라는 JSON 파싱 미들웨어(기능)을 사용한다는 것
 //요청은 JSON 형태로 오기 때문에 사용
@@ -231,17 +235,21 @@ app.post("/fcm", (request, response) => {
   const message = data.message;
   // fcm 서버로 요청
   axios({
+    // 보낼 uri
     url: "https://fcm.googleapis.com/fcm/send",
+    // 시작 부분
     method: "POST",
+    // 헤더 부분
     headers: {
-      "Content-Type": "application/json",
-      Authorization: `key=${serkey}`,
+      "Content-Type": "application/json", // 보디가 JSON형식이라는 뜻
+      Authorization: `key=${serkey}`, // 본인이 서버라는 것을 증명하는 인증키-fcm은 key=(인증키) 이 형식으로 요구
     },
+    // 보디 부분
     data: {
-      to: `${token}`,
-      notification: {
-        title: "Tosso",
-        body: `${message}`,
+      to: `${token}`, // 메세지를 보낼 클라이언트(토큰)
+      notification: { // 메세지 내용
+        title: "Tosso", // 메세지 제목
+        body: `${message}`, // 메세지 본문
       },
     },
   });

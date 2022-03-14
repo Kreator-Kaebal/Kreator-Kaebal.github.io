@@ -98,7 +98,9 @@ initToken의 리턴값을 그냥 출력하면 프로미스 객체 반환(getToke
 바로 처리 안된 getToken값을 token에 담아 반환해버리므로 발생하는 현상
 따라서 감싸는 함수에 async/await를 사용해서 getToken의 then 구문까지 실행되도록 대기 */
 const initTokenWrapper = async () => {
-  let token = await initToken();
+  let mytoken = await initToken();
+  // 토큰 출력
+  console.log(mytoken);
 
   // 일단 'my' 이름의 문서 객체 만들기
   const docprofile = doc(dbTokenData, "my");
@@ -106,16 +108,15 @@ const initTokenWrapper = async () => {
   const data = await getDoc(docprofile);
   // 해당 문서가 콜렉션에 있으면 불러오고 타임스탬프만 업데이트
   if (data.exists()) {
-    // 토큰 출력
-    console.log(data.data().token);
     updateDoc(doc(dbTokenData, "my"), {
+      token: mytoken,
       timestamp: Date.now(),
     });
     // 없으면 문서 생성(토큰값과 타임스탬프를 필드로 하여)
     // setDoc은 문서 객체(doc)을 사용하여 문서 이름을 정해 생성할 수 있게 하는 기능(addDoc은 임의의 이름으로)
   } else {
     setDoc(doc(dbTokenData, "my"), {
-      token: token,
+      token: mytoken,
       timestamp: Date.now(),
     });
   }

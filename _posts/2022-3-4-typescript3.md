@@ -2,7 +2,7 @@
 layout: post
 title: 타입스크립트를 사용한 Next.js 웹실습2
 tags: [java/typescript, react]
-excerpt: 메모장 서비스 만들기-기본 설정과 firebase 연동까지
+excerpt: 게시판 서비스 만들기-기본 설정과 firebase 연동까지
 ---
 
 ## Next.js와 파이어베이스 연동

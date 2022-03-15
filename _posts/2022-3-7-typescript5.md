@@ -2,7 +2,7 @@
 layout: post
 title: 타입스크립트를 사용한 Next.js 웹실습4
 tags: [java/typescript, react]
-excerpt: 메모장 서비스 만들기-fcm으로 푸쉬알림 보내기
+excerpt: 게시판 서비스 만들기-fcm으로 푸쉬알림 보내기
 ---
 
 ## fcm으로 푸쉬알림 보내기
@@ -38,7 +38,7 @@ var firebaseClientKey = (아까 클라우드 메세징에서 저장해놓은 키
 export var clikey = firebaseClientKey;
 ```
 
-그 다음 messaging_get_token.ts 파일을 수정한다. 설명은 주석문으로 대신하겠다.
+그 다음 messaging_get_token.ts 파일에 코드를 넣는다. 설명은 주석문으로 대신하겠다.
 
 ```javascript
 import { getMessaging, getToken } from "firebase/messaging";

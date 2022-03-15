@@ -2,7 +2,7 @@
 layout: post
 title: 타입스크립트를 사용한 Next.js 웹실습6
 tags: [java/typescript, react]
-excerpt: 메모장 서비스 만들기-fcm 메세지 보내는 다른 방법
+excerpt: 게시판 서비스 만들기-fcm 메세지 보내는 다른 방법
 ---
 
 ## fcm 메세지 보내는 방법2

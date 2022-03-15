@@ -47,7 +47,7 @@ import { app, clikey } from "../../firebase/firebaseConfig";
 // 토큰 생성
 const initToken = async () => {
   // firebaseConfig에서 생성한 initApp 객체로 메세징 객체-messaging 생성
-  const messaging = getMessaging();
+  const messaging = getMessaging(app);
   // 메세징 객체와 파이어베이스 키페어(clikey)로 토큰받기
   // getToken이 함수이므로 token 객체로 리턴값 저장
   // 참고로 getToken은 프로미스 객체를 리턴하므로 값을 받기 위해 await 써주기
@@ -160,21 +160,38 @@ public 폴더 내에 firebase-messaging-sw.js 파일을 생성하자.
 어쨌든 파일을 만들어준 후, 다음과 같이 작성한다.
 
 ```javascript
-importScripts('https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js');
 importScripts(
-	'https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js',
+	'https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compat.js',
 );
 
-firebase.initializeApp({
+const app = firebase.initializeApp({
   (firebaseConfig.ts에 있는 것과 동일)
 });
 
-const messaging = firebase.messaging();
+const messaging = firebase.messaging(app);
+
+messaging.onBackgroundMessage((payload) => {
+	const title = payload.notification.title;
+	const options = {
+		body: payload.notification.body,
+	};
+
+	ServiceWorkerRegistration.showNotification(title, options);
+});
+
 ```
 
-참고로 웹 버전 9로 하면 오류가 나기 때문에 다음과 같이 웹 버전 8로 하였다.  
-웹 버전 9와 8의 차이는 import {...} from "..."로 하느냐, importScripts(...)로 하느냐 등이 있다.  
-이 파일을 제외한 대부분의 파일들은 웹 버전 9로 작성했다고 보면 된다.
+이 파일은 **서비스 워커 파일**이다. 서비스 워커는 웹 프로젝트와는 별개로 따로 돌아가는 코드인데,  
+웹 서버에서 백그라운드로 돌아가는 프로그램이라 생각하면 된다.  
+따라서 firebaseConfig.ts에서 설정해 준 initializeApp도 여기서는 전혀 먹히지 않으므로 다시 만들고,  
+토큰을 받기 위해 messaging 객체도 추가해줘야 한다.
+
+그리고 onBackgroundMessage 객체도 추가해줘 서비스 워커가 알림을 받아 출력해 주도록 한다.
+
+참고로 파이어베이스 버전 9부터는 위와 구문이 전혀 다르다.  
+이 파일을 제외한 대부분의 파일들은 웹 버전 9로 작성했다고 보면 된다.  
+본인은 이 파일도 버전 9로 제작하기를 시도해보았으나 버그가 너무 많아... 임시방편으로 버전 9와 호환되는 버전 8 구문으로 작성하였다.
 
 이렇게 파일을 만든 다음, 다시 실행해보면
 
@@ -219,7 +236,7 @@ import { getMessaging, onMessage } from "firebase/messaging";
 import { app } from "../../firebase/firebaseConfig";
 
 const initMessage = () => {
-  const messaging = getMessaging();
+  const messaging = getMessaging(app);
   onMessage(messaging, (payload) => {
     console.log(payload.notification.title);
     console.log(payload.notification.body);

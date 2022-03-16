@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 Next.js 웹실습6
+title: 타입스크립트를 사용한 웹 프로젝트6
 tags: [java/typescript, react]
 excerpt: 게시판 서비스 만들기-fcm 메세지 보내는 다른 방법
 ---
@@ -39,21 +39,21 @@ OAuth2 키는 서버 인증키와는 매우 다른 키이므로, 이를 발급�
 
 각설하고, 키를 발급받으려면 https://developers.google.com/oauthplayground/으로 들어가야 한다.
 
-![tsc8-img1](/images/posts/typescript8-img1.png)
+![wp5-img1](/images/posts/webproject5-img1.png)
 
 수많은 무엇들이 나열되어 있는데, 이들은 OAuth2 키로 사용할 수 있는 기능(API)들을 나타낸 것이다. 여기서 사용할 API들을 선택해야 한다.
 우리는 FCM 관련 기능만 필요하므로, **Firebase Cloud Messging API v1**을 클릭하자.
 
-![tsc8-img2](/images/posts/typescript8-img2.png)
+![wp5-img2](/images/posts/webproject5-img2.png)
 
 클릭하면 나오는 하위 항목 두 개에 모두 체크해주고 **Authorize APIs** 버튼을 누르자.  
 로그인 또는 계정 선택 항목이 나오는데 **프로젝트를 만든 계정**을 선택하면 된다.
 
-![tsc8-img3](/images/posts/typescript8-img3.png)
+![wp5-img3](/images/posts/webproject5-img3.png)
 
 이런 창이 뜨면 두 항목에 모두 체크한 뒤 계속을 클릭한다.
 
-![tsc8-img4](/images/posts/typescript8-img4.png)
+![wp5-img4](/images/posts/webproject5-img4.png)
 
 여기서 파란 버튼을 누르면 아래 Refrest token과 Access token 창이 찬다.
 
@@ -124,7 +124,7 @@ npm i firebase-admin
 
 그 다음 파이어베이스 웹 콘솔->프로젝트 설정(톱니바퀴)->서비스 계정으로 이동한다.
 
-![tsc8-img5](/images/posts/typescript8-img5.png)
+![wp5-img5](/images/posts/webproject5-img5.png)
 
 아래 "Admin SDK 구성 스니펫"을 복사한 다음 서버 폴더에 **firebase_admin_init.ts** 파일을 생성해 붙여넣는다.
 
@@ -176,4 +176,4 @@ node.post("/fcm", async(request, response) => {
 });
 ```
 
-이제 클라이언트(localhost:3000)에서 [여기와 똑같이](https://kreator-kaebal.github.io/typescript6/) api 요청을 보내면 메세지가 온다!
+이제 클라이언트(localhost:3000)에서 [여기와 똑같이](https://kreator-kaebal.github.io/webproject5/) api 요청을 보내면 메세지가 온다!

@@ -1,20 +1,13 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 Next.js 웹실습7
+title: 타입스크립트를 사용한 웹 프로젝트7
 tags: [java/typescript, react]
-excerpt: 게시판 서비스 만들기-댓글만들기, api변경, 클라우드 함수로 api 대체하기
+excerpt: 게시판 서비스 만들기-댓글 구현과 알림테스트
 ---
 
-## 클라우드 함수
-
-클라우드 함수는 api를 대신하는 매우 효과적인 기능이다.  
-이 함수 이름만 알고 있으면 굳이 url 입력하고, 헤더 작성하고, 보디 작성하고... 등 귀찮은 작업 없이도 손쉽게 api를 요청할 수 있다.
-
-알 사람은 다 알지만, AWS의 람다함수(lambda)와 비슷한 기능이다.
-
-이번에는 코드를 조금 많이 수정해서 댓글 기능을 추가하고, 이전에 만든 푸쉬알림 api를 댓글이 달릴 때 알리는 것으로 수정해보겠다. 또한 이 api를 클라우드 함수로 만들어보기도 하겠다.
-
 ## 댓글창 만들기
+
+이번에는 클라이언트에 댓글 시스템을 추가하고, 휴대폰에서 클라이언트에 접속해 댓글을 보내면 컴퓨터에 알림이 오도록 구현해보겠다.
 
 TossoDetails.tsx에 아래와 같이 댓글창을 만들자.
 
@@ -134,19 +127,19 @@ css도 추가하자.
 
 이제 실행해보면?
 
-![tsc9-img1](/images/posts/typescript9-img1.png)
+![wp6-img1](/images/posts/webproject6-img1.png)
 
 댓글창이 추가되었다!
 
 댓글을 한번 입력해보고 Push 버턴을 눌러보자.
 
-![tsc9-img2](/images/posts/typescript9-img2.png)
+![wp6-img2](/images/posts/webproject6-img2.png)
 
 댓글이 등록되고 알림이 온다!(백그라운드였으면 알림창 대신 알림이 왔을 것이다)
 
 한번 파이어스토어 서버에 이게 어떻게 등록되어 있는지 살펴보자.
 
-![tsc9-img3](/images/posts/typescript9-img3.png)
+![wp6-img3](/images/posts/webproject6-img3.png)
 
 보다시피 **문서 안에 콜렉션이 생성되고, 거기에 문서가 들어있는 것**을 볼 수 있다.
 
@@ -254,7 +247,7 @@ ngrok http -region=ap (클라이언트 포트-기본 3000)
 
 이렇게 하면
 
-![tsc9-img4](/images/posts/typescript9-img4.png)
+![wp6-img4](/images/posts/webproject6-img4.png)
 
 이렇게 두 창이 나온다! 포트를 네트웤상에 열어 같은 네트웤이라면 http 또는 https으로도 접속 가능하게 하는 원리이다.  
 다만 이렇게 하면 보안상 취약해지므로 계속 켜놓지는 말자.
@@ -272,6 +265,6 @@ axios({
 
 휴대폰에서 클라이언트의 ngrok 주소로 접속한다. 마찬가지로 댓글을 입력한 뒤 Push 버튼을 누르면...
 
-![tsc9-img5](/images/posts/typescript9-img5.png)
+![wp6-img5](/images/posts/webproject6-img5.png)
 
 이렇게 컴퓨터에서 알림이 온다!

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 웹 프로젝트4
-tags: [java/typescript, react]
+title: 타입스크립트를 사용한 웹 프로젝트3
+tags: [java/typescript, firebase]
 excerpt: 게시판 서비스 만들기-fcm으로 푸쉬알림 보내기
 ---
 

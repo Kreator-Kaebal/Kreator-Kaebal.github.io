@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 웹 프로젝트8
+title: 타입스크립트를 사용한 웹 프로젝트7
 tags: [java/typescript, react]
 excerpt: 구글 클라우드 함수로 손쉽게 api구현
 ---

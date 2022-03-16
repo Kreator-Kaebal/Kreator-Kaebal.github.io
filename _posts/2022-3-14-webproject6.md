@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 웹 프로젝트7
-tags: [java/typescript, react]
+title: 타입스크립트를 사용한 웹 프로젝트6
+tags: [java/typescript, react/nextjs, firebase]
 excerpt: 게시판 서비스 만들기-댓글 구현과 알림테스트
 ---
 

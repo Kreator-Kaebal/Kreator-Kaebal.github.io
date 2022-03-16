@@ -1,8 +1,8 @@
 ---
 layout: post
-title: node express로 서버 만들기
-tags: [java/typescript]
-excerpt: 게시판 서비스 만들기-api 서버 구현
+title: 타입스크립트를 사용한 웹 프로젝트4
+tags: [java/typescript, node]
+excerpt: 게시판 서비스 만들기-node express로 api 서버 구현
 ---
 
 ## 서버 만들기

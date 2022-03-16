@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트2
-tags: [java/typescript, react]
+tags: [java/typescript, react/nextjs, firebase]
 excerpt: 게시판 서비스 만들기-기본 설정과 firebase 연동까지
 ---
 

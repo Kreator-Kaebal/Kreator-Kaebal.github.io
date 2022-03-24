@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 Next.js 웹실습4
-tags: [java/typescript, react]
-excerpt: 메모장 서비스 만들기-fcm으로 푸쉬알림 보내기
+title: 타입스크립트를 사용한 웹 프로젝트3
+tags: [java/typescript, firebase]
+excerpt: 게시판 서비스 만들기-fcm으로 푸쉬알림 보내기
 ---
 
 ## fcm으로 푸쉬알림 보내기
@@ -14,10 +14,10 @@ excerpt: 메모장 서비스 만들기-fcm으로 푸쉬알림 보내기
 
 파이어베이스에 있는 FCM[^1]을 활용하면 알림 서비스를 구현할 수 있다.  
 다시 한번 파이어베이스 콘솔에 접속해보자.  
-![tsc5-img1](/images/posts/typescript5-img1.png)  
+![wp3-img1](/images/posts/webproject3-img1.png)  
 프로젝트에 접속한 뒤, _프로젝트 개요_ 옆의 톱니바퀴를 눌러서 **프로젝트 설정**에 들어간다.  
 설정창에 들어가고 **클라우드 메세징**을 클릭한다.  
-![tsc5-img2](/images/posts/typescript5-img2.png)  
+![wp3-img2](/images/posts/webproject3-img2.png)  
 아래의 *웹 푸쉬 인증서*에서 **generate key pair**를 클릭한다.  
 그러면 키 하나가 뜰 텐데, 이를 저장해 놓는다.
 
@@ -30,7 +30,7 @@ excerpt: 메모장 서비스 만들기-fcm으로 푸쉬알림 보내기
 ### 토큰 받기
 
 먼저 프로젝트 폴더의 pages에 **fcm** 폴더를 생성하고, 거기에 messaging_get_token.ts 파일을 생성한다.  
-![tsc5-img3](/images/posts/typescript5-img3.png)  
+![wp3-img3](/images/posts/webproject3-img3.png)  
 이 파일을 건드리기 전, firebase/firebaseConfig.ts에 다음과 같은 코드를 넣는다.
 
 ```javascript
@@ -38,7 +38,7 @@ var firebaseClientKey = (아까 클라우드 메세징에서 저장해놓은 키
 export var clikey = firebaseClientKey;
 ```
 
-그 다음 messaging_get_token.ts 파일을 수정한다. 설명은 주석문으로 대신하겠다.
+그 다음 messaging_get_token.ts 파일에 코드를 넣는다. 설명은 주석문으로 대신하겠다.
 
 ```javascript
 import { getMessaging, getToken } from "firebase/messaging";
@@ -195,7 +195,7 @@ messaging.onBackgroundMessage((payload) => {
 
 이렇게 파일을 만든 다음, 다시 실행해보면
 
-![tsc5-img4](/images/posts/typescript5-img4.png)
+![wp3-img4](/images/posts/webproject3-img4.png)
 
 이런 식으로 토큰이 하나 나올 것이다.  
 메세지를 보내기 위해서는 이 토큰이 필요하다.
@@ -205,19 +205,19 @@ messaging.onBackgroundMessage((payload) => {
 백그라운드에서 알림이 오는지 확인하는 테스트이므로 *페이지가 열린 창을 최소화*해 놓자.
 
 파이어베이스 프로젝트 개요에 접속 후 화면을 아래로 내려
-![tsc5-img5](/images/posts/typescript5-img5.png)  
+![wp3-img5](/images/posts/webproject3-img5.png)  
 **Cloud Messaging** 항목에 들어간다.
 
-![tsc5-img6](/images/posts/typescript5-img6.png)  
+![wp3-img6](/images/posts/webproject3-img6.png)  
 들어간 뒤 **Send your first message**를 클릭한다.
 
-![tsc5-img7](/images/posts/typescript5-img7.png)  
+![wp3-img7](/images/posts/webproject3-img7.png)  
 알림 제목과 알림 텍스트를 입력 후 **테스트 메세지 전송**을 클릭한다.
 
-![tsc5-img8](/images/posts/typescript5-img8.png)  
+![wp3-img8](/images/posts/webproject3-img8.png)  
 **FCM 등록 토큰 추가**라는 항목에 콘솔창에서 받은 토큰을 입력 후, 테스트 버튼을 누른다.
 
-![tsc5-img9](/images/posts/typescript5-img9.png)  
+![wp3-img9](/images/posts/webproject3-img9.png)  
 윈도우 알림창에 메세지가 뜨는 것을 볼 수 있다!
 
 ## 백그라운드 아니여도 메세지 받는법
@@ -257,7 +257,7 @@ useEffect(initMessage, []);
 ```
 
 이제 마찬가지로 알림을 보내보면  
-![tsc5-img10](/images/posts/typescript5-img10.png)  
+![wp3-img10](/images/posts/webproject3-img10.png)  
 이렇게 알림창과 콘솔창에 알림 메세지가 뜨는 것을 볼 수 있다.  
 물론 적절히 가공하여 모달 창[^3] 형태로 만들 수도 있다.
 
@@ -274,11 +274,11 @@ npm i axios
 ```
 
 글 제목을 클릭하면 알림이 오도록 설정해보자.  
-![tsc5-img11](/images/posts/typescript5-img11.png)  
+![wp3-img11](/images/posts/webproject3-img11.png)  
 여기를 클릭
 
 우선 다시 파이어베이스 콘솔에 접속하여 _톱니바퀴-프로젝트 설정-클라우드 메세징_ 순으로 클릭한다.  
-![tsc5-img12](/images/posts/typescript5-img12.png)  
+![wp3-img12](/images/posts/webproject3-img12.png)  
 **서버 키**라는 것이 보일 텐데, 이를 복사해 *firebaseConfig.ts*에 저장하자.
 
 ```javascript
@@ -334,9 +334,9 @@ const getAlert = async () => {
 이러고 한번 실행해보자.  
 axios가 뭐고 그 아래 값들이 무엇인지는 [여기](https://kreator-kaebal.github.io/typescript7/)를 참고하라.
 
-![tsc5-img13](/images/posts/typescript5-img13.png)  
+![wp3-img13](/images/posts/webproject3-img13.png)  
 빨간색 체크된 부분(제목)을 클릭하면...  
-![tsc5-img14](/images/posts/typescript5-img14.png)  
+![wp3-img14](/images/posts/webproject3-img14.png)  
 메세지가 오고, 콘솔창에도 메세지 내용이 출력된다!
 
 물론 굳이 axios를 사용하지 않아도 Postman 같이 https 요청을 보낼 수 있는 프로그램이라면 메세지를 보낼 수 있다.  

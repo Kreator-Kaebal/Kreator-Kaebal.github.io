@@ -3,23 +3,17 @@ layout: default
 ---
 
 <article class="post">
-
-  <div class="date">
-    {{ page.date | date: "%e %m %Y" }}
-  </div>
+  <div class="date">{{ page.date | date: "%e %m %Y" }}</div>
   <div class="tag">
-    {% if page.tags %}
-    {% for tag in page.tags %}
-    {% if site.data.tags contains tag %}
-    <span class="tag" style="color: grey"><i>{{ site.data.format[tag] }}</i></span>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
+    {% if page.tags %} {% for tag in page.tags %} {% if site.data.tags contains
+    tag %}
+    <span class="tag" style="color: grey"
+      ><i>{{ site.data.format[tag] }}, </i></span
+    >
+    {% endif %} {% endfor %} {% endif %}
   </div>
 
-  <div class="entry">
-    {{ content | remove: page.excerpt }}
-  </div>
+  <div class="entry">{{ content | remove: page.excerpt }}</div>
 
   {% include disqus.html %}
 </article>

@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 Next.js 웹실습1
-tags: [java/typescript, react]
-excerpt: 타입스크립트 클론 코딩-사전준비
+title: 타입스크립트를 사용한 웹 프로젝트1
+tags: [java/typescript, react/nextjs]
+excerpt: 게시판 서비스 만들기-사전준비
 ---
 
 ## 타입스크립트를 사용한 Next.js 실습준비
@@ -28,14 +28,14 @@ excerpt: 타입스크립트 클론 코딩-사전준비
    - `npm start`는 본인 컴퓨터를 노드 JS 서버로 하여 리액트 프로젝트를 실행한 것이다.
 4. `localhost:3000` 페이지는 리액트에서 기본으로 제공해주는 메인 페이지이다. 우리는 앞으로 이것을 수정하는 식으로 개발을 진행할 것이다.
    - 본인 컴퓨터를 서버로 사용하였으므로 주소가 로컬호스트로 표기된다.  
-     ![tsc2-img1](/images/posts/typescript2-img1.png)  
+     ![wp1-img1](/images/posts/webproject1-img1.png)  
      참고로 컴퓨터와 같은 네트워크 내 기기들은 콘솔창에 뜨는 ip 주소로도 해당 페이지에 접속할 수 있다.
    - 리액트 프로젝트의 기본 포트는 3000이다.
 
 ## 프로젝트 설정
 
 [여기를 한번 참조해보자](https://create-react-app.dev/docs/adding-typescript/)  
-![tsc2-img2](/images/posts/typescript2-img2.png)
+![wp1-img2](/images/posts/webproject1-img2.png)
 
 - 프로젝트 폴더에 들어가면 아래와 같은 디렉토리가 나온다.
   - .git 및 readme.md는 본인이 이 프로젝트를 깃허브 레포지토리로 설정해놓아 생긴 것이므로, 없어도 무방하다.
@@ -64,7 +64,7 @@ excerpt: 타입스크립트 클론 코딩-사전준비
     `npm i eslint -D`  
     로 eslint를 devDependencies로 보내야 한다.
   - package.json을 열어서 devDependencies가 위와 같으면 잘 따라왔다.  
-    ![tsc2-img5](/images/posts/typescript2-img5.png)
+    ![wp1-img5](/images/posts/webproject1-img5.png)
 - 이제 ESLint 설정을 해줘야 한다. 프로젝트 폴더에서  
   `npx eslint --init`  
   을 실행시키고, 아래와 같이 선택한다.
@@ -155,7 +155,7 @@ excerpt: 타입스크립트 클론 코딩-사전준비
 - 위 prettier 설정을 실제 코드에 적용시키려면 VSCode 설정을 뜯어야한다. VSCode를 열어 `Ctrl+,`으로 설정창에 들어간다.
 
   - 설정창에 들어가면 오른쪽 위 아이콘 모음에  
-    ![tsc2-img6](/images/posts/typescript2-img6.png)  
+    ![wp1-img6](/images/posts/webproject1-img6.png)  
     이런 아이콘이 있을 것이다.  
     이것을 클릭하면 설정값들이 json 형식으로 저장된 `settings.json`파일이 열어진다.
   - 맨 아래에 다음과 같은 항목을 추가한다.
@@ -179,10 +179,10 @@ excerpt: 타입스크립트 클론 코딩-사전준비
 
 - 이제 프로젝트 폴더 내 타입스크립트 파일 하나를 열어보자.
   - pages/api/hello.ts 파일을 열어보면  
-    ![tsc2-img7](/images/posts/typescript2-img7.png)  
+    ![wp1-img7](/images/posts/webproject1-img7.png)  
     이렇게 빨간줄이 가득하다. 타입스크립트 문법에 맞지 않아 ESLint가 빨간줄을 일으킨 것이다.
   - 만약 여기서 저장을 하면?  
-    ![tsc2-img8](/images/posts/typescript2-img8.png)  
+    ![wp1-img8](/images/posts/webproject1-img8.png)  
     prettier에서 지정한 형식에 맞게 코드가 수정된다!  
     이제 타입스크립트 문법에도 맞으므로 ESLint가 빨간줄을 띄우지 않는다.
 
@@ -227,7 +227,7 @@ excerpt: 타입스크립트 클론 코딩-사전준비
 - 프로젝트를 새로 생성한다.
   - 이 때 `npx create-next-app 프로젝트명 --typescript` 이렇게 생성하자.
 - 프로젝트가 생성되었으면 디렉토리로 이동해 `npm run dev`으로 실행한다.
-  - ![tsc2-img3](/images/posts/typescript2-img3.png)  
+  - ![wp1-img3](/images/posts/webproject1-img3.png)  
     실행 후 프로젝트 디렉토리는 이렇게 생겼다.  
     .git 및 readme.md는 지워도 무방하다.
 - 만약 본인 깃 레포지토리로 바꾸고 싶으면...(깃 레포지토리 생성 가정하에)
@@ -238,7 +238,7 @@ excerpt: 타입스크립트 클론 코딩-사전준비
 - **tsconfig.json**도 strict 옵션 빼고는 건들지는 말자.
 
 앞으로 프로젝트는 next.js 환경을 전제로 개발해보겠다.
-![tsc2-img4](/images/posts/typescript2-img4.png)  
+![wp1-img4](/images/posts/webproject1-img4.png)  
 다음 시간에 계속...
 
 ---

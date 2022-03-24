@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 Next.js 웹실습2
-tags: [java/typescript, react]
-excerpt: 메모장 서비스 만들기-기본 설정과 firebase 연동까지
+title: 타입스크립트를 사용한 웹 프로젝트2
+tags: [java/typescript, react/nextjs, firebase]
+excerpt: 게시판 서비스 만들기-기본 설정과 firebase 연동까지
 ---
 
 ## Next.js와 파이어베이스 연동
@@ -273,7 +273,7 @@ const Home = () => {
 ### 테스트
 
 npm run dev로 실행해보면  
-![tsc3-img1](/images/posts/typescript3-img1.png)  
+![wp2-img1](/images/posts/webproject2-img1.png)  
 이렇게 뜨면 정상이다!
 
 ## 새 콤포넌트 생성
@@ -283,7 +283,7 @@ npm run dev로 실행해보면
 
 프로젝트 루트에 있는 **pages** 폴더 내에 *components*라는 폴더를 만들어주자.  
 해당 폴더에 들어가 *TossoOperations.tsx*라는 파일을 생성한다.  
-![tsc3-img2](/images/posts/typescript3-img2.png)  
+![wp2-img2](/images/posts/webproject2-img2.png)  
 이렇게 생성되면 정상(Dynamic,tossoDetails는 일단 무시하자)
 
 ### 기본 양식 작성
@@ -360,7 +360,7 @@ Tosso.module.css에
 `<TossoOperations />` 으로 바꿔준다.
 
 이후 실행해보면...  
-![tsc3-img3](/images/posts/typescript3-img3.png)  
+![wp2-img3](/images/posts/webproject2-img3.png)  
 왼쪽 화면이 이렇게 바뀐것을 볼 수 있다!
 
 ### 파이어베이스 추가
@@ -371,26 +371,26 @@ Tosso.module.css에
 (생성시 google analystics는 사용하지 않을 것이므로 체크 해제하자)  
 데이터베이스를 추가하라고 나올 것인데, 적절한 리전을 선택해 추가해준다.  
 (보통은 ap-northeast-x 를 많이 선택한다)  
-![tsc3-img4](/images/posts/typescript3-img4.png)  
+![wp2-img4](/images/posts/webproject2-img4.png)  
 데이터베이스 생성이 완료되면 위 사진과 같이 나올 것이다.  
 **컬렉션 시작**을 클릭해 새 콜렉션을 만들어준다.  
-![tsc3-img5](/images/posts/typescript3-img5.png)  
+![wp2-img5](/images/posts/webproject2-img5.png)  
 *첫 번째 문서 추가*는 아무렇게나 대충 만들어주자.
 
 그 다음 이를 자바스크립트에서 쓰기 위해 **앱** 생성을 해야 한다.  
 왼쪽 *프로젝트 개요*를 클릭해 프로젝트 홈으로 이동한 뒤  
-![tsc3-img6](/images/posts/typescript3-img6.png)  
+![wp2-img6](/images/posts/webproject2-img6.png)  
 위 그림같은 것에서 **</>** 모양을 클릭한다.
 
 *웹 앱에 Firebase 추가*라는 화면이 나올 텐데,  
 앱 닉네임을 입력 후 Firebase 호스팅 체크는 하지 말자.
 
 다음 단계로 넘어가면 *Firebase SDK 추가*라는 화면이 나온다.  
-![tsc3-img7](/images/posts/typescript3-img7.png)  
+![wp2-img7](/images/posts/webproject2-img7.png)  
 *npm 사용*을 체크한 뒤, npm install firebase는 아까 했으니까 패쓰하고  
 아래 코드가 중요하다.  
 아래 코드를 통째로 복사한 뒤 프로젝트 루트 폴더에 **firebaseConfig.ts** 파일을 생성하여 통째로 붙여넣자.  
-![tsc3-img8](/images/posts/typescript3-img8.png)  
+![wp2-img8](/images/posts/webproject2-img8.png)  
 본인은 firebase 폴더를 생성하여 그 아래에 넣었다.
 
 ### 막간을 틈탄 firestore란
@@ -563,7 +563,7 @@ setInputVisible() 내에 !isInputVisible 인자를 넣어주었다.
 
 ### 테스트
 
-![tsc3-img9](/images/posts/typescript3-img9.gif)  
+![wp2-img9](/images/posts/webproject2-img9.gif)  
 Add a New Tosso 버튼을 누르면 창이 나온다.  
 제목과 내용을 입력하고 Save Tosso를 누르면 창이 새로고침될 뿐 아무것도 일어나지 않는다.  
 하지만 아까 생성한 *파이어스토어 콜렉션*에 들어가보면...?  

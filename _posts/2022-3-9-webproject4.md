@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 타입스크립트를 사용한 Next.js 웹실습5
-tags: [java/typescript, react]
-excerpt: 메모장 서비스 만들기-node.express로 서버구현
+title: 타입스크립트를 사용한 웹 프로젝트4
+tags: [java/typescript, node]
+excerpt: 게시판 서비스 만들기-node express로 api 서버 구현
 ---
 
 ## 서버 만들기
@@ -13,9 +13,9 @@ excerpt: 메모장 서비스 만들기-node.express로 서버구현
 아참, 프로젝트 폴더 디렉토리 구조가 조금 바뀌었다.  
 난잡한 디렉토리 구조를 정리하느라 조금 바뀌었는데,
 
-![tsc6-img0](/images/posts/typescript6-img0.png)  
+![wp4-img0](/images/posts/webproject4-img0.png)  
 참고하길 바란다.  
-![tsc6-img0](/images/posts/typescript6-img0-1.png)  
+![wp4-img01](/images/posts/webproject4-img0-1.png)  
 이해를 돕기위한 이전 대조군
 
 [여기에 들어가면 코드 전문을 볼 수 있다](https://github.com/kaebalsaebal/pseudo-website)
@@ -26,7 +26,7 @@ excerpt: 메모장 서비스 만들기-node.express로 서버구현
 푸쉬 알림을 보내려면 **서버 키**, **fcm 토큰**이 필요하다는 것도 배웠다.  
 이를 도식화해서 표현하면
 
-![tsc6-img1](/images/posts/typescript6-img1.png)
+![wp4-img1](/images/posts/webproject4-img1.png)
 
 대충 이런 식으로 작동된다고 한다.
 
@@ -53,7 +53,7 @@ npm i -D @types/node @types/express ts-node nodemon typescript
 - @types/node - 타입스크리트에서 node.js를 사용해기 위해 node 타잎을 추가
 - @types/express - 마찬가지로 express.js를위해 express타잎추가
 - ts-node - 컴파일 작업 없이 타잎스크립트를 바로 실행
-  - tsc 서버.ts -> node 서버.js 이렇게 안해도 ts-node 서버.ts 한방에 실행가능
+  - 타잎스크립트 서버 실행은 npm run build로 먼저 컴파일해야하는데 이렇게 안해도 ts-node 서버.ts 한방에 실행가능
 - nodemon - 코드 변경 후 저장시 서버를 다시시작
 
 ts-node와 nodemon을 써먹기 위해 package.json을 수정한다.
@@ -69,7 +69,7 @@ ts-node와 nodemon을 써먹기 위해 package.json을 수정한다.
 `tsc --init`을 사용하여 tsconfig.json도 만든다.  
 만들었으면 폴더에 서버의 핵심인 **server.ts** 파일을 하나 만들자.
 
-![tsc6-img2](/images/posts/typescript6-img2.png)
+![wp4-img2](/images/posts/webproject4-img2.png)
 
 ```javascript
 // 아까 @types/express로 불러온 express객체
@@ -96,7 +96,7 @@ localhost:8080
 ```
 
 위 주소로 접속하면 아래 화면과같은 에러가 날텐데  
-![tsc6-img3](/images/posts/typescript6-img3.png)  
+![wp4-img3](/images/posts/webproject4-img3.png)  
 이는 서버에 올라간 html 페이지가 없기에 발생한 일이다.
 
 서버를 켜면 페이지를 불러오도록 만들어보겠다.
@@ -120,7 +120,7 @@ app.get("/", (request, response) => {
 그 다음 server.ts에 다음을 추가한다.
 
 서버를 다시 켜고 웹창을 새로고침해보면  
-![tsc6-img4](/images/posts/typescript6-img4.png)  
+![wp4-img4](/images/posts/webproject4-img4.png)  
 이제 정상적으로 페이지가 뜨는 것을 볼 수 있다.
 
 ### api 만들어보기
@@ -171,7 +171,7 @@ npm run dev로 서버를 실행해보고 http 요청을 보낼 수 있는 프로
 본인은 **POSTMAN**이라는 프로그램을 사용하였다. api 테스트시 아주 유용한 프로그램이다.  
 [다운로드는 여기서](https://www.postman.com/)
 
-![tsc6-img5](/images/posts/typescript6-img5.png)
+![wp4-img5](/images/posts/webproject4-img5.png)
 
 이 사진에서 GET은 GET 요청, localhost:8080/tosso는 요청 주소,  
 아래 params,auth,...들은 요청 객체에 들어가는 것들을 지정해주는 것이다.  
@@ -310,7 +310,7 @@ app.use(cors(mycors));
 
 서버에 이를 설정하고 실행해보면...
 
-![tsc6-img6](/images/posts/typescript6-img6.png)
+![wp4-img6](/images/posts/webproject4-img6.png)
 
 이제 잘 나온다!
 

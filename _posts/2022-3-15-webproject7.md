@@ -2,7 +2,7 @@
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트7
 tags: [java/typescript, firebase]
-excerpt: 구글 클라우드 함수로 손쉽게 api구현
+excerpt: 구글 클라우드 함수로 손쉽게 api서버 구현
 ---
 
 ## 구글 클라우드 함수
@@ -227,7 +227,50 @@ http://localhost:5001/(파이어베이스 프로젝트 아이디)/us-central1/(�
 
 파이어스토어 화면이 나온다. 문서가 성공적으로 등록되었다!
 
-## 배포 및 응용형은 다음 시간에...
+## 함수 배포
+
+에뮬레이터는 언제까지 본인 컴퓨터(로컬)에서 임시로 사용하는 것이므로, 실제 api를 사용 가능하게 만드려면 **배포**를 해야 한다.  
+배포는 프로젝트를 구글 클라우드 상에 올리는 것을 뜻한다. 이렇게 올라간 프로젝트는 클라우드 서버에 컨테이너 형태로 변환되어 자동으로 실행된다.  
+잘 이해가 되지 않겠지만, 프로젝트 코드를 클라우드 서버에 있는 가상머신에 올려 24시간 돌린다고 보면 편하다.
+한번 api를 배포해보자.
+
+### 배포 방법
+
+구글 CLI를 사용하면 편하다.  
+클라우드 함수 프로젝트 폴더/functions에 들어가서 콘솔창을 연 다음,
+
+```
+firebase deploy --only functions
+```
+
+을 입력한다. 파이어베이스 프로젝트(웹상에 있는 그것)에 클라우드 함수 프로젝트를 올리겠다는 의미이다.
+
+(입력 후 에러가 나오면 보통 ESLint 에러이다.)
+
+```
+npm install -d eslint-config-prettier
+```
+
+를 해주고, 그래도 에러가 나오면 에러 로그를 보며 ESLint 규정에 맞게 코드를 고치자.
+
+그렇게 ESLint 에러를 해결했는데...
+
+```
+Error: Your project test-1017c must be on the Blaze (pay-as-you-go) plan to complete this command. Required API cloudbuild.googleapis.com can't be enabled until the upgrade is complete. To upgrade, visit the following URL:
+```
+
+최종 보스가 등장하였다.  
+다름 아닌 요금제 문제이다. 즉 배포하려면 돈 내라 이말이다.  
+본인은 테스트 프로젝트에 요금을 부과할 수는 없으므로 패쓰하겠다.
+
+어쨌든 돈을 내던지 해서 배포가 성공하면...
+
+![wp7-img11](/images/posts/webproject7-img11.png)
+
+(위 사진은 요금 낸 프로젝트이다.)  
+이렇게 프로젝트 웹 콘솔에서 왼쪽 Functions를 클릭하면 배포되어 클라우드에서 실행중인 파이어베이스 함수를 볼 수 있다.  
+① 번 항목은 함수 종류, ②번 항목은 api 주소이다.  
+이제 로컬호스트 대신 ②번의 주소로 요청하면 클라우드 서버와 통신하는 것이다!
 
 ---
 

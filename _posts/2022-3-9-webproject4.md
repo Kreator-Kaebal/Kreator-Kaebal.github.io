@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트4
+categories: [웹개발-타입스크립트 프로젝트]
 tags: [java/typescript, node]
 excerpt: 게시판 서비스 만들기-node express로 api 서버 구현
 ---
@@ -73,11 +74,11 @@ ts-node와 nodemon을 써먹기 위해 package.json을 수정한다.
 
 ```javascript
 // 아까 @types/express로 불러온 express객체
-import express from "express";
+import express from 'express';
 
 const app = express();
 
-app.listen("8080", () => {
+app.listen('8080', () => {
   console.log(`8080 포트에서 실행중...`);
 });
 ```
@@ -111,9 +112,9 @@ localhost:8080
 
 ```javascript
 //(도메인)/ 주소에 tosso.html을 표시
-app.get("/", (request, response) => {
+app.get('/', (request, response) => {
   //sendFile 내에는 tosso.html의 절대경로 넣어주기
-  response.sendFile(__dirname + "/public/tosso.html");
+  response.sendFile(__dirname + '/public/tosso.html');
 });
 ```
 
@@ -133,9 +134,9 @@ app.get("/", (request, response) => {
 아까 만든 app.get을 그대로 활용하면 된다. 사실 이게 rest api이다.
 
 ```javascript
-app.get("/", (request, response) => {
+app.get('/', (request, response) => {
   //sendFile 내에는 tosso.html의 절대경로 넣어주기
-  response.sendFile(__dirname + "/public/tosso.html");
+  response.sendFile(__dirname + '/public/tosso.html');
 });
 ```
 
@@ -159,8 +160,8 @@ app.get("/", (request, response) => {
 이를 응용하여 테스트삼아 하나의 api를 만들어보자. server.ts에 추가
 
 ```javascript
-app.get("/tosso", (request, response) => {
-  response.send({ message: "tosso" });
+app.get('/tosso', (request, response) => {
+  response.send({ message: 'tosso' });
 });
 ```
 
@@ -193,18 +194,18 @@ TossoDetails.txt의 getAlert 함수를 수정하여 직접 fcm 요청을 보내�
 ```javascript
 const getAlert = async () => {
   // 토큰을 파이어스토어에서 꺼내오기
-  const data = await getDoc(doc(dbTokenData, "my"));
+  const data = await getDoc(doc(dbTokenData, 'my'));
   const { token } = data.data();
 
   // 토큰과 받고싶은 메세지를 요청의 Body에 담아 POST전송
   axios({
-    url: "http://localhost:8080/fcm",
+    url: 'http://localhost:8080/fcm',
     // 시작 부분
-    method: "POST",
+    method: 'POST',
     // 보디
     data: {
       token: `${token}`,
-      message: "tosso",
+      message: 'tosso',
     },
   });
 };
@@ -299,7 +300,7 @@ cors에 특정 URL만 신뢰하는 설정을 넣어줄 수 있다.
 
 ```javascript
 const mycors = {
-  origin: "http://localhost:3000",
+  origin: 'http://localhost:3000',
   credentials: true,
 };
 

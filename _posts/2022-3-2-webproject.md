@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트1
+categories: [웹개발-타입스크립트 프로젝트]
 tags: [java/typescript, react/nextjs]
 excerpt: 게시판 서비스 만들기-사전준비
 ---

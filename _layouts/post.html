@@ -7,9 +7,9 @@ layout: default
   <div class="tag">
     {% if page.tags %} {% for tag in page.tags %} {% if site.data.tags contains
     tag %}
-    <span class="tag" style="color: grey"
-      ><i>{{ site.data.format[tag] }}, </i></span
-    >
+    <span class="tag"
+      >{{ site.data.format[tag] }}<br />
+    </span>
     {% endif %} {% endfor %} {% endif %}
   </div>
 

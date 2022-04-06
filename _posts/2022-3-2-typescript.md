@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트
+categories: [컴퓨터 상식]
 tags: [java/typescript, computer science]
 excerpt: 자바스크립트의 발전형인 타입스크립트
 ---

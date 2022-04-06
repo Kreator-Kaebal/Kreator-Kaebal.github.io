@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트3
+categories: [웹개발-타입스크립트 프로젝트]
 tags: [java/typescript, firebase]
 excerpt: 게시판 서비스 만들기-fcm으로 푸쉬알림 보내기
 ---
@@ -41,8 +42,8 @@ export var clikey = firebaseClientKey;
 그 다음 messaging_get_token.ts 파일에 코드를 넣는다. 설명은 주석문으로 대신하겠다.
 
 ```javascript
-import { getMessaging, getToken } from "firebase/messaging";
-import { app, clikey } from "../../firebase/firebaseConfig";
+import { getMessaging, getToken } from 'firebase/messaging';
+import { app, clikey } from '../../firebase/firebaseConfig';
 
 // 토큰 생성
 const initToken = async () => {
@@ -56,14 +57,12 @@ const initToken = async () => {
       if (currentToken) {
         return currentToken;
       } else {
-        console.log(
-          "No registration token available. Request permission to generate one."
-        );
+        console.log('No registration token available. Request permission to generate one.');
         return null;
       }
     })
     .catch((err) => {
-      console.log("An error occurred while retrieving token. ", err);
+      console.log('An error occurred while retrieving token. ', err);
       return null;
     });
   // 받아온 토큰인 token객체 반환
@@ -85,14 +84,14 @@ getMessaging()의 괄호 안에는 firebaseConfig에서 생성한 initializeApp 
 
 ```javascript
 // 아래 임포트틀 추가
-import { useEffect } from "react";
-import { database } from "../firebase/firebaseConfig";
-import { collection, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
-import initToken from "./fcm/messaging_get_token";
+import { useEffect } from 'react';
+import { database } from '../firebase/firebaseConfig';
+import { collection, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+import initToken from './fcm/messaging_get_token';
 
 // 파이어스토어의 tokens 콜렉션에 토큰 넣기
 // 토큰을 굳이 파이어스토어에 넣는 이유는 조금 있다 설명
-const dbTokenData = collection(database, "tokens");
+const dbTokenData = collection(database, 'tokens');
 /* 앱 실행시 토큰받는 함수(messaging_get_token 내 initToken)
 initToken의 리턴값을 그냥 출력하면 프로미스 객체 반환(getToken()이 프로미스 함수)initToken이 끝날 때까지 기다리지 않고
 바로 처리 안된 getToken값을 token에 담아 반환해버리므로 발생하는 현상
@@ -103,19 +102,19 @@ const initTokenWrapper = async () => {
   console.log(mytoken);
 
   // 일단 'my' 이름의 문서 객체 만들기
-  const docprofile = doc(dbTokenData, "my");
+  const docprofile = doc(dbTokenData, 'my');
   // getDoc도 프로미스 함수이므로 마찬가지로 리턴값 받기위해 await 사용
   const data = await getDoc(docprofile);
   // 해당 문서가 콜렉션에 있으면 불러오고 타임스탬프만 업데이트
   if (data.exists()) {
-    updateDoc(doc(dbTokenData, "my"), {
+    updateDoc(doc(dbTokenData, 'my'), {
       token: mytoken,
       timestamp: Date.now(),
     });
     // 없으면 문서 생성(토큰값과 타임스탬프를 필드로 하여)
     // setDoc은 문서 객체(doc)을 사용하여 문서 이름을 정해 생성할 수 있게 하는 기능(addDoc은 임의의 이름으로)
   } else {
-    setDoc(doc(dbTokenData, "my"), {
+    setDoc(doc(dbTokenData, 'my'), {
       token: mytoken,
       timestamp: Date.now(),
     });
@@ -232,15 +231,15 @@ fcm 메세지는 기본적으로 백그라운드 상태에서 알림을 받기 �
 fcm 폴더에 **messaging_get_message.ts**를 생성한 뒤 다음과 같이 작성하자.
 
 ```javascript
-import { getMessaging, onMessage } from "firebase/messaging";
-import { app } from "../../firebase/firebaseConfig";
+import { getMessaging, onMessage } from 'firebase/messaging';
+import { app } from '../../firebase/firebaseConfig';
 
 const initMessage = () => {
   const messaging = getMessaging(app);
   onMessage(messaging, (payload) => {
     console.log(payload.notification.title);
     console.log(payload.notification.body);
-    alert(payload.notification.body + "이다");
+    alert(payload.notification.body + '이다');
   });
 };
 
@@ -251,7 +250,7 @@ export default initMessage;
 
 ```javascript
 // 임포트 추가
-import initMessage from "./fcm/messaging_get_message";
+import initMessage from './fcm/messaging_get_message';
 // initTokenWrapper 아래에 추가
 useEffect(initMessage, []);
 ```

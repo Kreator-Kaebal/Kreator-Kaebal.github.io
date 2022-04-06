@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트7
+categories: [웹개발-타입스크립트 프로젝트]
 tags: [java/typescript, firebase]
 excerpt: 구글 클라우드 함수로 손쉽게 api서버 구현
 ---
@@ -108,11 +109,11 @@ firebase init functions
 ### 간단한 예제
 
 ```javascript
-import * as functions from "firebase-functions";
-import * as admin from "firebase-admin";
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 
-import Ajv from "ajv";
-import { custmemberschema } from "./interfaces/custmemberschema";
+import Ajv from 'ajv';
+import { custmemberschema } from './interfaces/custmemberschema';
 
 admin.initializeApp();
 ```
@@ -129,31 +130,25 @@ custmemberschema는 사전에 정의해놓은 body 형식이다.
 그 다음 아래에서 함수를 생성하는데...
 
 ```javascript
-export const datastore = functions.https.onRequest(
-  async (request, response) => {
-    //const memkeys: Array<string> = Object.getOwnPropertyNames(request.body);
-    try {
-      const data = Object(request.body);
-      let check = ajv.validate(custmemberschema, data);
+export const datastore = functions.https.onRequest(async (request, response) => {
+  //const memkeys: Array<string> = Object.getOwnPropertyNames(request.body);
+  try {
+    const data = Object(request.body);
+    let check = ajv.validate(custmemberschema, data);
 
-      if (check) {
-        await admin.firestore().collection("test").add(data);
-        response
-          .status(200)
-          .json({ message: "파이어스토어 저장이 완료되었습니다." });
-      } else {
-        response
-          .status(400)
-          .json({ message: "요청 body 형식을 다시 확인하세요." });
-      }
-    } catch (error) {
-      response.status(500).json({
-        message: "서버와의 연결이 끊어졌습니다.",
-        error: error,
-      });
+    if (check) {
+      await admin.firestore().collection('test').add(data);
+      response.status(200).json({ message: '파이어스토어 저장이 완료되었습니다.' });
+    } else {
+      response.status(400).json({ message: '요청 body 형식을 다시 확인하세요.' });
     }
+  } catch (error) {
+    response.status(500).json({
+      message: '서버와의 연결이 끊어졌습니다.',
+      error: error,
+    });
   }
-);
+});
 ```
 
 대충 request body에 담긴 내용을 test라는 파이어스토어 콜렉션 문서로 추가한다는 것이다.

@@ -4,7 +4,7 @@ layout: default
 
 <article class="post">
   <div class="date">{{ page.date | date: "%e %m %Y" }}</div>
-  <div class="tag">
+  <div class="tags">
     {% if page.tags %} {% for tag in page.tags %} {% if site.data.tags contains
     tag %}
     <span class="tag"

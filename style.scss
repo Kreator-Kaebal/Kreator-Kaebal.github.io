@@ -15,20 +15,40 @@
 
 html {
   font-size: 100%;
+  height: 91%;
 }
 
 body {
   background: #cfcfc4;
-  font: 18px/1.4 'Gothic A1', sans-serif;
+  font: 18px/1.8 'Gothic A1', sans-serif;
   font-weight: 300;
+  word-break: keep-all;
   color: $darkGray;
+
+  height: 100%;
+  
+  @include mobile{
+    line-height: 1.6;
+  }
+}
+
+.wrapper {
+  min-height: 100%;
 }
 
 .container {
-  margin: 0 auto;
-  max-width: 1920px;
-  padding: 0 10px;
-  width: 100%;
+  background-color: $lightGray;
+  border-radius: 20px;
+  max-width: 75%;
+  margin: 0 auto 50px auto;
+  padding: 10px;
+
+  @include mobile {
+    margin-bottom: 25px;
+    padding: 5px;
+    max-width: 100%;
+    border-radius: 0;
+  }
 }
 
 h1,
@@ -37,36 +57,41 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $helveticaNeue;
-  color: $darkerGray;
   font-weight: bold;
 
-  line-height: 1.7;
-  margin: 1em 0 15px;
+  margin: 15px 0;
   padding: 0;
-
-  @include mobile {
-    line-height: 1.4;
-  }
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 1.75rem;
   a {
     color: inherit;
+  }
+
+  @include mobile {
+    font-size: 1.5rem;
   }
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 1.5rem;
+  
+  @include mobile {
+    font-size: 1.25rem;
+  }
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 1.25rem;
+  
+  @include mobile {
+    font-size: 1rem;
+  }
 }
 
 h4 {
-  font-size: 18px;
+  font-size: 1rem;
   color: $gray;
 }
 
@@ -132,24 +157,20 @@ img {
 // .masthead
 //
 
-.wrapper-masthead {
-  margin-top: 25px;
-  margin-bottom: 25px;
+.wrapper-masthead > .container {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
   @include mobile {
-    margin: 0;
-    .container {
-      padding: 0;
-    }
+    padding: 0;
   }
 }
 
 .masthead {
   padding: 5px;
-  border-radius: 20px;
   background-color: $lightGray;
   @include mobile {
     text-align: center;
-    border-radius: 0px;
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
@@ -157,12 +178,14 @@ img {
 }
 
 .site-avatar {
+  padding-top: 4px;
   float: left;
   width: 70px;
   height: 70px;
   margin-right: 15px;
 
   @include mobile {
+    padding-top: 0;
     float: none;
     display: block;
     margin: 0 auto;
@@ -187,9 +210,7 @@ img {
   margin: 0;
   color: $darkGray;
   cursor: pointer;
-  font-family: 'Gothic A1', sans-serif;
-  font-weight: 700;
-  font-size: 28px;
+  font-size: 2rem;
   letter-spacing: 1px;
   @include mobile {
     margin: 3px 0;
@@ -199,9 +220,8 @@ img {
 .site-description {
   margin: -5px 0 0 0;
   color: $gray;
-  font-family: 'Gothic A1', sans-serif;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 1rem;
 
   @include mobile {
     margin: 3px 0;
@@ -210,34 +230,35 @@ img {
 
 nav {
   float: right;
-  margin-top: 23px; // @TODO: Vertically middle align
+  margin-top: 25px; // @TODO: Vertically middle align
   font-family: $helveticaNeue;
-  font-size: 18px;
+  font-size: 1rem;
 
   @include mobile {
     float: none;
     margin-top: 9px;
     display: flex;
     justify-content: space-around;
-    font-size: 16px;
+    font-size: 0.9rem;
   }
 
   a {
     margin-left: 10px;
-    padding: 10px;
+    padding: 5px 10px;
     color: $darkGray;
     text-align: center;
-    font-family: 'Gothic A1', sans-serif;
-    font-weight: 300;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 1rem;
     letter-spacing: 1px;
     background-color: $white;
     border-radius: 20px;
 
     @include mobile {
-      margin: 0px;
+      margin: 0;
+      padding: 0;
       width: 50%;
-      border: 1px solid $lightGray;
+      border-left: 1px solid $lightGray;
+      border-right: 1px solid $lightGray;
       border-radius: 0px;
       color: $blue;
     }
@@ -245,14 +266,7 @@ nav {
 }
 
 .site-category {
-  background-color: $lightGray;
-  margin: 0 10px;
-  padding: 0 10px;
-  border-radius: 20px;
-  @include mobile {
-    border-radius: 0;
-    margin: 0px;
-  }
+
   h2 {
     margin: 0;
   }
@@ -306,17 +320,54 @@ nav {
 // .main
 //
 
-.posts > .post {
-  padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
+.posts {
+  .post {
+    padding: 25px 0 25px 0;
+    border-bottom: 1px solid $gray;
+
+    @include mobile {
+      padding: 12.5px 0;
+    }
+  }
+
+  .post:first-child {
+    padding-top: 15px;
+
+    @include mobile {
+      padding-top: 7.5px;
+    }
+  }
+
+  .post:last-child {
+    padding-bottom: 15px;
+    border-bottom: none;
+
+    @include mobile {
+      padding-bottom: 7.5px;
+    }
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .entry {
+    font-weight: 400;
+  }
+
 }
 
-.posts > .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
+.tag {
+  margin: 0 2px;
+  color: $darkGray;
+  font-weight: 600;
+  background-color: $white;
+  padding: 2px 5px;
+  border-radius: 20px;
 }
 
 .post {
+
   blockquote {
     margin: 1.8em 0.8em;
     border-left: 2px solid $gray;
@@ -326,19 +377,15 @@ nav {
     font-style: italic;
   }
 
-  .comments {
-    margin-top: 10px;
-  }
-
-  .read-more {
-    text-transform: uppercase;
-    font-size: 15px;
-  }
 }
 
-.wrapper-footer {
-  margin-top: 50px;
-  background-color: $lightGray;
+.wrapper-footer, .push {
+  height: 0;
+  .container{
+    margin-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 }
 
 footer {

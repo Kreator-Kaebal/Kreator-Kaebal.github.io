@@ -2,14 +2,17 @@
 layout: default
 ---
 
-<ul class="posts-list">
+<div class="posts">
   {% assign category = page.category | default: page.title %} {% for post in
-  site.categories[category] %}
-  <li>
-    <h3>
-      <a href="{{ site.baseurl }}{{ post.url }}"> {{ post.title }} </a>
-      <small>{{ post.date | date_to_string }}</small>
-    </h3>
-  </li>
+    site.categories[category] %}
+  <article class="post">
+    <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+
+    <div class="entry">{{ post.excerpt }}</div>
+
+    {% if post.tags %} {% for tag in post.tags %} {% if site.data.tags contains tag %}
+    <a class="tag">{{ tag }} </a>
+    {% endif %} {% endfor %} {% endif %}
+  </article>
   {% endfor %}
-</ul>
+</div>

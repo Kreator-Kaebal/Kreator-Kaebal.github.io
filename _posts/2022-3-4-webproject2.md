@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트2
+categories: [웹개발-타입스크립트 프로젝트]
 tags: [java/typescript, react/nextjs, firebase]
 excerpt: 게시판 서비스 만들기-기본 설정과 firebase 연동까지
 ---
@@ -53,61 +54,56 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    "plugin:react/recommended",
-    "airbnb",
-    "airbnb-typescript",
-    "plugin:prettier/recommended",
-  ],
-  parser: "@typescript-eslint/parser",
+  extends: ['plugin:react/recommended', 'airbnb', 'airbnb-typescript', 'plugin:prettier/recommended'],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ["./tsconfig.eslint.json", "./tsconfig.json"],
+    project: ['./tsconfig.eslint.json', './tsconfig.json'],
     tsconfigRootDir: __dirname,
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: "latest",
-    sourceType: "module",
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
-  plugins: ["react", "@typescript-eslint"],
+  plugins: ['react', '@typescript-eslint'],
   rules: {
-    "arrow-body-style": ["error", "always"],
-    "jsx-a11y/anchor-is-valid": 0,
-    "react/button-has-type": 0,
-    "react/function-component-definition": ["off"],
-    "react/react-in-jsx-scope": 0,
-    "react/prefer-stateless-function": 0,
-    "react/jsx-no-bind": 0,
-    "react/jsx-no-useless-fragment": 0,
-    "react/jsx-one-expression-per-line": 0,
-    "react/jsx-props-no-spreading": 0,
-    "no-nested-ternary": 0,
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "off",
-    "no-use-before-define": ["off"],
-    "react/jsx-filename-extension": [
+    'arrow-body-style': ['error', 'always'],
+    'jsx-a11y/anchor-is-valid': 0,
+    'react/button-has-type': 0,
+    'react/function-component-definition': ['off'],
+    'react/react-in-jsx-scope': 0,
+    'react/prefer-stateless-function': 0,
+    'react/jsx-no-bind': 0,
+    'react/jsx-no-useless-fragment': 0,
+    'react/jsx-one-expression-per-line': 0,
+    'react/jsx-props-no-spreading': 0,
+    'no-nested-ternary': 0,
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': 'off',
+    'no-use-before-define': ['off'],
+    'react/jsx-filename-extension': [
       2,
       {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     ],
-    "import/extensions": [
+    'import/extensions': [
       2,
-      "ignorePackages",
+      'ignorePackages',
       {
-        js: "never",
-        jsx: "never",
-        ts: "never",
-        tsx: "never",
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
       },
     ],
-    "prettier/prettier": "error",
+    'prettier/prettier': 'error',
   },
   settings: {
-    "import/resolver": {
+    'import/resolver': {
       node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
-        moduleDirectory: ["node_modules", "@types"],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        moduleDirectory: ['node_modules', '@types'],
       },
       typescript: {},
     },
@@ -223,8 +219,8 @@ firebase는 당연히 파이어베이스 사용에 필요하고, react-quill은 
 프로젝트 폴더의 **pages/index.tsx**를 다음과 같이 수정한다.
 
 ```javascript
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
 
 const Home = () => {
   return (
@@ -291,8 +287,8 @@ npm run dev로 실행해보면
 TossoOperations.tsx를
 
 ```javascript
-import styles from "../../styles/Tosso.module.css";
-import ReactQuill from "react-quill";
+import styles from '../../styles/Tosso.module.css';
+import ReactQuill from 'react-quill';
 
 const TossoOperations = () => {
   return (
@@ -407,9 +403,9 @@ NoSQL 데이터베이스는 말 그대로 SQL 명령어를 사용하지 않는 �
 맨 위에
 
 ```javascript
-import { useState, useEffect } from "react";
-import { database } from "../../firebase/firebaseConfig";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { useState, useEffect } from 'react';
+import { database } from '../../firebase/firebaseConfig';
+import { collection, addDoc, getDocs } from 'firebase/firestore';
 ```
 
 을 추가한다.  
@@ -440,11 +436,7 @@ return (
     {isInputVisible ? (
       <div className={styles.inputContainer}>
         {/* 입력값 들어올시 tossoTitle 값을 그걸로 변경 */}
-        <input
-          className={styles.input}
-          placeholder="Enter the tosso.."
-          onChange={(e) => setTossoTitle(e.target.value)}
-        />
+        <input className={styles.input} placeholder="Enter the tosso.." onChange={(e) => setTossoTitle(e.target.value)} />
         {/* 입력값 들어올시 tossoDesc 값을 그걸로 변경 */}
         <div className={styles.ReactQuill}>
           <ReactQuill theme="snow" onChange={addDesc} />
@@ -548,11 +540,7 @@ setInputVisible() 내에 !isInputVisible 인자를 넣어주었다.
 이 <div> 내 항목을 보면
 
 ```javascript
-<input
-  className={styles.input}
-  placeholder="Enter the tosso.."
-  onChange={(e) => setTossoTitle(e.target.value)}
-/>
+<input className={styles.input} placeholder="Enter the tosso.." onChange={(e) => setTossoTitle(e.target.value)} />
 ```
 
 여기서 onChange에 주목해보자.  

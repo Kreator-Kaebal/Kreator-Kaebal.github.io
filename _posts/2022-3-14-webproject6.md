@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트6
+categories: [웹개발-타입스크립트 프로젝트]
 tags: [java/typescript, react/nextjs, firebase]
 excerpt: 게시판 서비스 만들기-댓글 구현과 알림테스트
 ---
@@ -147,7 +148,7 @@ css도 추가하자.
 
 ```javascript
 // dbInstance라는 콜렉션에서 id로 문서를 찾고, 거기에 comments는 하위 콜렉션 생성
-const subcol = collection(dbInstance, id, "comments");
+const subcol = collection(dbInstance, id, 'comments');
 await addDoc(subcol, {
   content: comment, // 하위 콜렉션에 문서 작성
 });
@@ -161,7 +162,7 @@ getAlert(comment); // 댓글이 왔다는 알림보내기
 
 ```javascript
 // 마찬가지로 해당 id 문서의 comments 하위 콜렉션 찾기
-const subcol = collection(dbInstance, id, "comments");
+const subcol = collection(dbInstance, id, 'comments');
 // 거기서 문서 다 뽑아낸 후 commentArray에 저장
 getDocs(subcol).then((data) => {
   setCommentArray(
@@ -201,7 +202,7 @@ button은 해당 댓글 id인 문서를 찾아 삭제하는 deleteComment 함수
 ```javascript
 async function getSingleTosso() {
   if (id) {
-    const singleTosso = doc(database, "tosso", id);
+    const singleTosso = doc(database, 'tosso', id);
     // getDoc은 특정 문서(doc객체)만 받아오는 것
     const data = await getDoc(singleTosso);
     setSingleTosso({ ...data.data(), id: data.id });

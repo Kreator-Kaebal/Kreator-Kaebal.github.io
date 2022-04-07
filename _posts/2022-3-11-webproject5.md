@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트5
+categories: [웹개발-타입스크립트 프로젝트]
 tags: [java/typescript, firebase]
 excerpt: 게시판 서비스 만들기-fcm 메세지 보내는 다른 방법
 ---

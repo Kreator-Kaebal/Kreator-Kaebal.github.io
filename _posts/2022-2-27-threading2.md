@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 파이썬 쓰레드
+categories: [파이썬]
 tags: [python]
 excerpt: 파이썬 멀티쓰레드 활용법
 ---

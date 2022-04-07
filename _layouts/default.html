@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>
-      {% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{
-      site.description }}
-    </title>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
     {% include meta.html %}
 
@@ -12,51 +9,52 @@
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{{ site.baseurl }}/style.css"
-    />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="{{ site.name }} - {{ site.description }}"
-      href="{{ site.baseurl }}/feed.xml"
-    />
-
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600;700&family=Jua&display=swap" rel="stylesheet" />
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
 
-  <body style="background-color: #d3d3d3">
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"
-            ><img src="{{ site.avatar }}"
-          /></a>
+  <body class="body">
+    <div class="wrapper">
+      <div class="wrapper-masthead">
+        <div class="container">
+          <header class="masthead clearfix">
+            <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
 
-          <div class="site-info">
-            <h1 class="site-name">
-              <a href="{{ site.baseurl }}/">{{ site.name }}</a>
-            </h1>
-            <p class="site-description">{{ site.description }}</p>
-          </div>
+            <div class="site-info">
+              <h1 class="site-name">
+                <a href="{{ site.baseurl }}/">{{ site.name }}</a>
+              </h1>
+              <p class="site-description">{{ site.description }}</p>
+            </div>
 
-          <nav>
-            <a href="{{ site.baseurl }}/">목록</a>
-            <a href="{{ site.baseurl }}/about">본인은?</a>
-          </nav>
-        </header>
+            <nav>
+              <a href="{{ site.baseurl }}/">홈으로</a>
+              <a href="{{ site.baseurl }}/about">본인은?</a>
+            </nav>
+          </header>
+        </div>
       </div>
-    </div>
 
-    <div
-      id="main"
-      role="main"
-      class="container"
-      style="background-color: #d3d3d3"
-    >
-      {{ content }}
+      <div class="site-category">
+        <div class="container">
+          <h2>목록</h2>
+          <ul>
+            {% assign pages_list = site.pages %} {% for node in pages_list %} {% if node.title != null %} {% if node.layout == "category" %}
+            <li>
+              <a class="category-link {% if page.url == node.url %} active{% endif %}" href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
+            </li>
+            {% endif %} {% endif %} {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div id="main" role="main" class="container">{{ content }}</div>
+      
+      <div class="push"></div>
     </div>
 
     <div class="wrapper-footer">

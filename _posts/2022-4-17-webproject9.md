@@ -84,12 +84,57 @@ useEffect(function () {
 ```
 
 이렇게 함수를 만들면 된다.  
-간단히 말해 파이어베이스 현재 권한을 받아(getAuth) 파이어베이스에 로그인하여(signInEmailAndPassword) 권한을 변경하고, 그것이 감지되면(onAuthStateChanged) 토큰을 받아(getIdToken) 출력하는 것이다.
+간단히 말해
+
+* 현재 권한(getAuth)을 이메일/PW와 함께
+* 파이어베이스에 로그인하여(signInEmailAndPassword) 권한을 변경하고,
+* 그것이 감지되면(onAuthStateChanged) 해당 권한 사용자의
+* 토큰을 받아(getIdToken) 출력하는 것이다.
 
 ![wp9-img6](/images/posts/webproject9-img6.png)
 
 실행해보면 이렇게 콘솔창에 user token is ...라고 사용자 토큰이 출력된다.
 
+### api 서버에서 토큰 인증절차 만들기
+
+인증절차는 서버에서 진행된다. 이전시간에 node express 코드들을 파이어베이스로 이관시켰으므로 앞으로 서버 프로그래밍은 파이어베이스 프로젝트를 기준으로 설명하겠다.  
+
+인증절차를 만드는 방법은 간단한데, 이전시간에 설명한 **미들웨어**를 활용하면 된다.  
+요청이 들어오면 미들웨어에서 헤더에 있는 토큰을 읽어다 검증한 뒤 없거나 유효하지 않으면 401 에러를 날려버리면 끝이다!
+
+```javascript
+app.use(function (req,res,next){
+    const tokenId = req.get('Authorization').split('Bearer ')[1];
+
+    if (tokenId) {
+        admin.auth().verifyIdToken(tokenId)
+        .then(() => {return next();})
+        .catch((err) => {console.log(err); res.status(401).send({success: false, message: '인증에 실패하였습니다.'})});
+    } else {
+        res.status(400).send({success: false, mesasge: "헤더에 Authorization: Bearer (사용자토큰) 형식으로 넣으세요."});
+    }
+})
+```
+
+api 함수들과 cors 미들웨어 사이에 이 구문을 넣어주면 이제 매 api[^3] 요청시마다 헤더 확인을 한다.  
+[여기서](http://kreator-kaebal.github.io/webproject7/) 임시로 만든 datastore api로 실험해본다.  
+
+* 헤더 안넣을 시
+  ![wp9-img7](/images/posts/webproject9-img7.png)
+  미들웨어단에서 400에러로 반환된다.
+* 헤더 이상하게 넣을 시
+  ![wp9-img8](/images/posts/webproject9-img8.png)  
+  마찬가지로 401에러로 미들웨어단에서 반환된다.
+* 올바르게 넣을 시
+  ![wp9-img9](/images/posts/webproject9-img9.png)
+  클라이언트에서 받은 토큰을 Authorization 헤더에 Bearer (토큰값) 형식으로 넣으면 된다.  
+  참고로 Authorization 헤더에 Bearer 형식은 구글에서 그렇게 하라는 것으로 토달지 말자.  
+
+![wp9-img10](/images/posts/webproject9-img10.png)
+
+들어가졌다!
+
 ---
 [^1]: console.firebase.google.com/...으로 시작하는 사이트
 [^2]: 세부적으로 fcm 토큰은 **파이어베이스 앱을 구분**, 여기서 만들 토큰은 **파이어베이스 앱 내의 사용자를 구분**한다는 차이점이 있다.
+[^3]: 정확히는 **v1**으로 라우팅된 api들

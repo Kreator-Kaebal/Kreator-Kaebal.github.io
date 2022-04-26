@@ -91,6 +91,96 @@ v1이라는 이름은 각자 원하는 것으로 교체해도 무방하다.
 
 이렇게 한 뒤 배포해보고 엔드포인트에 맞춰 요청해본 뒤 정상적으로 응답이 오면 연동 성공이다!
 
+
+### 노드 익스프레스 api 이전하기
+
+이렇게 하면 이전 [express로 만든 api서버](http://kreator-kaebal.github.io/webproject4)를 파이어베이스 프로젝트로 옮기기 쉬워진다.  
+
+```javascript
+import express from "express";
+import axios from "axios";
+import cors from "cors";
+import { getMessaging } from "firebase-admin/messaging";
+import { app } from "./firebase_init";
+
+node.get("/", (request, response) => {
+  response.sendFile(__dirname + "/public/tosso.html");
+});
+
+node.get("/tosso", (request, response) => {
+  response.send({ message: "tosso" });
+});
+
+// 8080 포트를 사용한다는 뜻
+node.listen("8080", () => {
+  console.log(`8080 포트에서 실행중...`);
+});
+
+// express.json()이라는 JSON 파싱 미들웨어(기능)을 사용한다는 것
+// 요청은 JSON 형태로 오기 때문에 사용
+node.use(express.json());
+
+// 한 컴퓨터에서 서버를 두개켜므로 cors 사용
+node.use(cors());
+
+// /fcm 주소로 들어오는 post 요청을 처리한다는 뜻
+node.post("/fcm", async (request, response) => {
+  // 요청의 body 부분을 빼오기
+  const data = request.body;
+  // 이렇게 body에서 토큰과 메세지 빼기
+  // express.json()을 사용하였으므로 점 하나로 간단하게 처리
+  const token = data.token;
+  const reqmessage = data.message;
+  // fcm 서버로 요청
+  const message = {
+    notification: {
+      title: "test",
+      body: `${reqmessage}`,
+    },
+    data: {
+      title: "test",
+      body: `${reqmessage}`,
+    },
+    token: `fn2fOvPIbvLMF4kAkijugi:APA91bHKt6cIZ7voazsdRg4AbTbkNT5BBSh_B0lg14RSOta8JgDaIUY-sDLEt2-z4ZYO6LveTnYlnPvbj1Fc0JPk8EQwJpNt_HmdiPeAVk4DcHLADuWIkOORR1fIIxzb7HJyXqcDheN3`,
+  };
+  const messaging = getMessaging(app);
+  messaging
+    .send(message)
+    .then((res) => {
+      console.log(res);
+      response
+        .status(200)
+        .send({ message: "메세지가 성공적으로 보내졌습니다" });
+    })
+    .catch((error) => {
+      console.log(error);
+      response.status(500).send({ message: "메세지 전송이 실패했습니다." });
+    });
+```
+
+express 서버 내 api들은 이전에 이렇게 구현해놨는데(import문 제외)  
+이걸 그냥 파이어베이스 프로젝트로 옮기고 app.use(cors())같이 겹치는 임포트문 등을 제거하면 된다.
+
+```javascript
+node.get("/", (request, response) => {
+  response.sendFile(__dirname + "/public/tosso.html");
+});
+
+node.get("/tosso", (request, response) => {
+  response.send({ message: "tosso" });
+});
+
+// 8080 포트를 사용한다는 뜻
+node.listen("8080", () => {
+  console.log(`8080 포트에서 실행중...`);
+});
+```
+
+이 구문도 필요없으니 지워주자.
+
+그다음 라우팅 항목에서 말한것처럼 node.post(...), node.get(...)같은 api함수를 const (함수명)처럼 평범한 함수로 바꿔주고, express 변수를 사용해 엔드포인트를 지정한뒤 라우팅해주면 끝난다.  
+다만 여기서는 express() 변수명이 node가 아닌 app임에 유의한다. 당연히 ```getMessaging(app)```의 app은 initializeApp() 변수명으로 바꿔줘야 하고.
+
 ### 미들웨어
 
 node express는 **미들웨어**라는 독특한 기능을 제공한다.  

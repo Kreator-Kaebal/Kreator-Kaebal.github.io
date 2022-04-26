@@ -120,7 +120,7 @@ firebase init functions
 
 **src** 폴더에 들어가보면 **index.ts**(자바스크립트 선택시 js) 파일이 있을 텐데, 이 파일에서 함수를 만들면 된다.
 
-### 간단한 예제
+### 초기 설정
 
 ```javascript
 import * as functions from 'firebase-functions';
@@ -138,7 +138,54 @@ index.ts 파일은 서버를 실행시키면 가장 먼저 실행되는 파일�
 
 어쨌든 functions와 admin을 불러와서 admin.initializeApp()으로 서버를 초기화한다.
 
-Ajv는 요청 body 형식을 확인하는 npm 모듈로, 일단은 신경쓰지 말자.  
+이 때, 파이어베이스 어드민(서버)의 initializeApp()은 그냥 파이어베이스(클라이언트)의 initializeApp()과 설정하는 법이 다르다.  
+
+어드민의 initializeApp 설정을 가져오기 위해서는
+
+![wp7-img12](/images/posts/webproject7-img12.png)
+
+웹 콘솔에서 **톱니바퀴-프로젝트 설정-서비스 계정**으로 들어가야 한다.  
+여기서 **Firebase Admin SDK**를 클릭한 다음 **새 비공개 키 생성**을 누르면 json 파일 하나가 다운로드 받아진다.  
+
+이 파일을 서버 폴더 안에 넣은 다음 위의 코드를 복사해 붙여넣으면 된다.  
+물론 firebase-admin 임포트는 했으니 빼고 "path/to/..."는 json 파일 경로로 바꿔주는 것은 당연하다.  
+주의할 점은 이 파일은 보안파일이라 github 배포 등을 할때 같이 푸쉬하지 말도록 하자.
+
+여기서는 타잎스크립트를 사용하므로 문법을 적절하게 바꿔
+
+```javascript
+...
+import * as serviceAccount from "(json이 저장된 경로-파일명 확장자까지 포함하여)";
+...
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+  databaseURL: "https://(프로젝트 아이디).firebaseio.com"
+});
+...
+```
+
+현재는 설정에 databaseURL(파이어스토어 주소)만 들어가 있지만, 파이어베이스 스토리지같이 다른 기능들도 추가할 수 있다.  
+
+참고로 위처럼 했는데 json 임포트가 오류나는 분은 **tsconfig.json**에  
+
+```json
+{
+  "compilerOptions": {
+    ...
+    "resolveJsonModule": true,
+  },
+  ...
+}
+```
+
+compilerOptions에 resolveJsonModule 옵션을 true로 추가해주면 된다.
+
+### 간단한 예제
+
+간단하게 요청 보디를 확인한 후 파이어스토어에 넣는 api를 제작하겠다.
+
+위에서 Ajv와 custmemberschema를 임포트했는데, Ajv는 요청 body 형식을 확인하는 npm 모듈로, 일단은 신경쓰지 말자.  
 custmemberschema는 사전에 정의해놓은 body 형식이다.
 
 그 다음 아래에서 함수를 생성하는데...
@@ -165,7 +212,8 @@ export const datastore = functions.https.onRequest(async (request, response) => 
 });
 ```
 
-대충 request body에 담긴 내용을 test라는 파이어스토어 콜렉션 문서로 추가한다는 것이다.
+대충 request body에 담긴 내용을 test라는 파이어스토어 콜렉션 문서로 추가한다는 것이다.  
+ajv로 요청형식 확인하고 싶지 않으면 check구문을 과감히 빼버리자.
 
 ajv 모듈을 사용해 리퀘스트 보디가 요구되는 형식(custmemberschema)과 맞지 않으면 false를, 맞으면 true를 반환한다(check)
 

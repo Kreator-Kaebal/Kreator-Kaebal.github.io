@@ -78,10 +78,10 @@ useEffect(function () {
 이렇게 함수를 만들면 된다.  
 간단히 말해
 
-* 현재 권한(getAuth)을 이메일/PW와 함께
-* 파이어베이스에 로그인하여(signInEmailAndPassword) 권한을 변경하고,
-* 그것이 감지되면(onAuthStateChanged) 해당 권한 사용자의
-* 토큰을 받아(getIdToken) 출력하는 것이다.
+* 현재 권한(getAuth)을 받은 다음
+* 이메일/PW와 함께 파이어베이스에 로그인하여(signInEmailAndPassword)
+* 성공하면 콜백으로 오는 userCredential 변수에 토큰이 있기에
+* 거기서 토큰값만 빼와 출력하는 것이다.
 
 ![wp9-img6](/images/posts/webproject9-img6.png)
 

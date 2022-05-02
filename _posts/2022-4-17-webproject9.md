@@ -65,20 +65,12 @@ useEffect(function () {
         '(아까 비밀번호)',
     )
         .then((userCredential) => {
-            console.log(userCredential.user);
+            const token = userCredential.user.accessToken;
+            console.log(`user token is ${token}`);
         })
         .catch((err) => {
             console.log(err);
         });
-
-    onAuthStateChanged(auth, async (user) => {
-        try {
-            const result = await getIdToken(user);
-            console.log(`user token is ${result}`);
-        } catch (err) {
-            console.log(err);
-        }
-    });
 }, []);
 ...
 ```

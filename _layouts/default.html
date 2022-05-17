@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    {% include analytics.html %}
     <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
     {% include meta.html %}
@@ -15,7 +16,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600;700&family=Jua&display=swap" rel="stylesheet" />
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
-    {% include analytics.html %}
   </head>
 
   <body class="body">

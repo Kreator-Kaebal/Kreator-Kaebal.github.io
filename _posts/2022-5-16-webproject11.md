@@ -136,7 +136,7 @@ class MyDocument extends Document {
 export default MyDocument;
 ```
 
-_document.jsx/tsx의 구조는 원래 이런 모양이다. 여기의 <Head> 태그 아래에 아까 복사한 코드를 붙여넣어야 한다.  
+_document.jsx/tsx의 구조는 원래 이런 모양이다. 여기의 ```<Head>``` 태그 아래에 아까 복사한 코드를 붙여넣어야 한다.  
 
 ```javascript
 import { GA_TRACKING_ID } from '(gtag.js/ts의 위치)'
@@ -147,21 +147,24 @@ import { GA_TRACKING_ID } from '(gtag.js/ts의 위치)'
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
     />
     <script
-        dangerouslySetInnerHTML={{
-            __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', GA_TRACKING_ID, {page_path: window.location.pathname});
-            `,
-        }}
+       dangerouslySetInnerHTML={% raw %}{{
+          __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', GA_TRACKING_ID, {
+            page_path: window.location.pathname,
+          });
+          `,
+       }}{% endraw %}
     />
 </Head>
 ...
 ```
 
-다만 그대로 복사했다가는 React 계열의 특성상 jsx 언어에서는 주석문을 사용하지 못하고 <script> 태그로 자바스크립트를 바로 넣지 못하기 때문에(보안 때문이라고 한다)
+(raw/endraw 는 jekyll 컴파일 오류때문에 집어넣은 문자로 실제 적용에서는 삭제해주자)
+
+다만 그대로 복사했다가는 React 계열의 특성상 jsx 언어에서는 주석문을 사용하지 못하고 ```<script>``` 태그로 자바스크립트를 바로 넣지 못하기 때문에(보안 때문이라고 한다)
 *dangerouslySetInnerHTML* 등을 사용하여 위와 같이 jsx 형식에 맞게 수정해줘야 한다.
 
 그리고 마지막으로, _app.jsx/tsx 에 들어가서 페이지에서 gtag.ts 처리를 위한 useEffect 문 하나를 추가해준다.

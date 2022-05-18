@@ -2,7 +2,7 @@
 layout: post
 title: 외전-프로세스와 쓰레드
 categories: [컴퓨터 상식]
-tags: [computer science]
+tags: [computer science, process, threading]
 excerpt: 컴퓨터 과학 관점에서 설명하는 프로세스, 쓰레드, 멀티프로세싱, 멀티쓰레딩
 ---
 

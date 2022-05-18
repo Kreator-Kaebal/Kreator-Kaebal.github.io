@@ -2,7 +2,7 @@
 layout: post
 title: 알고리듬 문제를 풀어보자-탐욕
 categories: [알고리듬]
-tags: [algorithm]
+tags: [algorithm, greedy]
 excerpt: 탐욕 알고리듬과 실전문제
 ---
 

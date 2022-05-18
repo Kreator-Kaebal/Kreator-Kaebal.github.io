@@ -2,7 +2,7 @@
 layout: post
 title: 타입스크립트를 사용한 웹 프로젝트 번외편
 categories: [웹개발-타입스크립트 프로젝트]
-tags: [java/typescript, firebase]
+tags: [java/typescript, firebase, analytics]
 excerpt: 번외편-구글 애널래틱스
 ---
 

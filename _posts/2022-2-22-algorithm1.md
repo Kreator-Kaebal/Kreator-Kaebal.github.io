@@ -2,7 +2,7 @@
 layout: post
 title: 알고리듬 문제를 풀어보자-dfs
 categories: [알고리듬]
-tags: [algorithm]
+tags: [algorithm, dfs]
 excerpt: dfs 알고리듬과 실전문제
 ---
 

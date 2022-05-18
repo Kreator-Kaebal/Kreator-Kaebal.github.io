@@ -5,12 +5,11 @@ layout: default
 <article class="post">
   <div class="date">{{ page.date | date: "%e %m %Y" }}</div>
   <div class="tags">
-    {% if page.tags %} {% for tag in page.tags %} {% if site.data.tags contains
-    tag %}
+    {% if page.tags %} {% for tag in page.tags %}
     <span class="tag"
-      >{{ site.data.format[tag] }}<br />
+      >{{ tag }}<br />
     </span>
-    {% endif %} {% endfor %} {% endif %}
+    {% endfor %} {% endif %}
   </div>
 
   <div class="entry">{{ content | remove: page.excerpt }}</div>

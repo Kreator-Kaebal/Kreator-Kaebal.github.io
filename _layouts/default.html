@@ -1,69 +1,86 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    {% include analytics.html %}
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+---
+layout: compress
+---
 
-    {% include meta.html %}
+<!doctype html>
 
-    <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+{% include origin-type.html %}
 
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@300;400;500;600;700&family=Jua&display=swap" rel="stylesheet" />
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
-  </head>
+{% include lang.html %}
 
-  <body class="body">
-    <div class="wrapper">
-      <div class="wrapper-masthead">
-        <div class="container">
-          <header class="masthead clearfix">
-            <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+{% if site.theme_mode %}
+  {% capture prefer_mode %}data-mode="{{ site.theme_mode }}"{% endcapture %}
+{% endif %}
 
-            <div class="site-info">
-              <h1 class="site-name">
-                <a href="{{ site.baseurl }}/">{{ site.name }}</a>
-              </h1>
-              <p class="site-description">{{ site.description }}</p>
+<!-- `site.alt_lang` can specify a language different from the UI -->
+<html lang="{{ page.lang | default: site.alt_lang | default: site.lang }}" {{ prefer_mode }}>
+  {% include head.html %}
+
+  <body>
+    {% include sidebar.html lang=lang %}
+
+    <div id="main-wrapper" class="d-flex justify-content-center">
+      <div class="container d-flex flex-column px-xxl-5">
+        {% include topbar.html lang=lang %}
+
+        <div class="row flex-grow-1">
+          <main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            {% if layout.refactor or layout.layout == 'default' %}
+              {% include refactor-content.html content=content lang=lang %}
+            {% else %}
+              {{ content }}
+            {% endif %}
+          </main>
+
+          <!-- panel -->
+          <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <div class="access">
+              {% include_cached update-list.html lang=lang %}
+              {% include_cached trending-tags.html lang=lang %}
             </div>
 
-            <nav>
-              <a href="{{ site.baseurl }}/">홈으로</a>
-              <a href="{{ site.baseurl }}/about">본인은?</a>
-            </nav>
-          </header>
+            {% for _include in layout.panel_includes %}
+              {% assign _include_path = _include | append: '.html' %}
+              {% include {{ _include_path }} lang=lang %}
+            {% endfor %}
+          </aside>
         </div>
+
+        <div class="row">
+          <!-- tail -->
+          <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4">
+            {% for _include in layout.tail_includes %}
+              {% assign _include_path = _include | append: '.html' %}
+              {% include {{ _include_path }} lang=lang %}
+            {% endfor %}
+
+            {% include_cached footer.html lang=lang %}
+          </div>
+        </div>
+
+        {% include_cached search-results.html lang=lang %}
       </div>
 
-      <div class="site-category">
-        <div class="container">
-          <h2>목록</h2>
-          <ul>
-            {% assign pages_list = site.pages %} {% for node in pages_list %} {% if node.title != null %} {% if node.layout == "category" %}
-            <li>
-              <a class="category-link {% if page.url == node.url %} active{% endif %}" href="{{ site.baseurl }}{{ node.url }}">{{ node.title }}</a>
-            </li>
-            {% endif %} {% endif %} {% endfor %}
-          </ul>
-        </div>
-      </div>
-
-      <div id="main" role="main" class="container">{{ content }}</div>
-      
-      <div class="push"></div>
+      <aside aria-label="Scroll to Top">
+        <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow">
+          <i class="fas fa-angle-up"></i>
+        </button>
+      </aside>
     </div>
 
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          <i>2022 kaebalcreator34 제공.</i>
-        </footer>
-      </div>
-    </div>
+    <div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div>
+
+    {% if site.pwa.enabled %}
+      {% include_cached notification.html lang=lang %}
+    {% endif %}
+
+    <!-- Embedded scripts -->
+
+    {% for _include in layout.script_includes %}
+      {% assign _include_path = _include | append: '.html' %}
+      {% include {{ _include_path }} %}
+    {% endfor %}
+
+    {% include_cached search-loader.html lang=lang %}
   </body>
 </html>

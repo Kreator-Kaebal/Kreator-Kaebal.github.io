@@ -1,11 +1,8 @@
 ---
-layout: page
-title: 정보
-permalink: /about/
+# the default layout is 'page'
+icon: fas fa-info-circle
+order: 4
 ---
 
-취미로 개발하는 유사 개발자(?)입니다.
-
-### 여기로 연락해주세요
-
-[kaebalcreator34@protonmail.com](mailto:kaebalcreator34@protonmail.com)
+> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
+{: .prompt-tip }

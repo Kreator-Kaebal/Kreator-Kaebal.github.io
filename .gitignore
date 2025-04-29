@@ -28,6 +28,6 @@ assets/js/dist
 
 # Custom(Write your custom directories below)
 .devcontainer
-.github
+#.github
 .husky
 .vscode

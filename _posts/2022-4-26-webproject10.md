@@ -116,7 +116,7 @@ const getToken = (id,pw) => {
 };
 ```
 
-[지난 시간](http://kreator-kaebal.github.io/webproject8)에 했던 클라이언트에서 uid 토큰받기의 _app.tsx useEffect 함수를 적절히 고친 것이다. 대충 설명하자면
+[지난 시간](https://kreator-kaebal.github.io/webproject8)에 했던 클라이언트에서 uid 토큰받기의 _app.tsx useEffect 함수를 적절히 고친 것이다. 대충 설명하자면
 
 * ```getAuth()```로 파이어베이스 인증 상태 변수를 가져온다.
 * ```signInWithEmailAndPassword()```에 이 인증변수,아이디,비밀번호를 집어넣어 로그인을 시도한다.

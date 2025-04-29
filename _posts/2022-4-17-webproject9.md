@@ -8,7 +8,7 @@ excerpt: 배운 것들을 응용하여 api 사용자 인증하기
 
 ## 지난 시간에
 
-[지난번](http://kreator-kaebal.github.io/webproject8/)에 파이어베이스 클라우드 함수를 node express 형태로 만드는 것과, 이를 활용해 클라우드 함수를 라우팅하고 미들웨어 처리하는 방법을 배웠다.
+[지난번](https://kreator-kaebal.github.io/webproject8/)에 파이어베이스 클라우드 함수를 node express 형태로 만드는 것과, 이를 활용해 클라우드 함수를 라우팅하고 미들웨어 처리하는 방법을 배웠다.
 
 이렇게 배운 기능들을 응용하여 게시판 api에 보안 기능을 추가해보자.  
 가장 기본적이지만 중요한 보안으로, **파이어베이스에 등록된 사용자만** api 요청을 할 수 있도록 한다.  
@@ -48,7 +48,7 @@ excerpt: 배운 것들을 응용하여 api 사용자 인증하기
 
 ### 클라이언트에서 사용자 토큰 생성
 
-이 내용은 [fcm 메세지 전송](http://kreator-kaebal.github.io/webproject3/) 때의 토큰 생성 방식과 유사하다. 토큰(Token)이라는 것은 클라이언트 구분을 위한 **임시 고유값** 이기 때문이다.[^2]
+이 내용은 [fcm 메세지 전송](https://kreator-kaebal.github.io/webproject3/) 때의 토큰 생성 방식과 유사하다. 토큰(Token)이라는 것은 클라이언트 구분을 위한 **임시 고유값** 이기 때문이다.[^2]
 
 클라이언트에서 매번 웹페이지 초기화 때마다 토큰을 받는 useEffect 함수를 추가해주자.
 
@@ -109,7 +109,7 @@ app.use(function (req,res,next){
 ```
 
 api 함수들과 cors 미들웨어 사이에 이 구문을 넣어주면 이제 매 api[^3] 요청시마다 헤더 확인을 한다.  
-[여기서](http://kreator-kaebal.github.io/webproject7/) 임시로 만든 datastore api로 실험해본다.  
+[여기서](https://kreator-kaebal.github.io/webproject7/) 임시로 만든 datastore api로 실험해본다.  
 
 * 헤더 안넣을 시
   ![wp9-img7](/images/posts/webproject9-img7.png)

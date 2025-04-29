@@ -8,14 +8,14 @@ excerpt: 파이어베이스 클라우드 함수 응용
 
 ## 클라우드 응용
 
-지난 [웹프로젝트 7번](http://kreator-kaebal.github.io/webproject7/)번에서는 파이어베이스 클라우드 함수를 사용하여 서버 구축 없이 api 서버를 제작하는 방법을 배웠봤다.
+지난 [웹프로젝트 7번](https://kreator-kaebal.github.io/webproject7/)번에서는 파이어베이스 클라우드 함수를 사용하여 서버 구축 없이 api 서버를 제작하는 방법을 배웠봤다.
 이 api 서버를 조금 더 체계적으로 만들어보자.
 
 ## node express와 통합
 
 파이어베이스 클라우드 함수는 다양한 언어를 지원하는데, 만약 이 블로그처럼 Node.js(자바스크립트)를 사용하여 구현한다면 node express 문법으로도 제작할 수 있다.
 
-node express가 무엇인지는 [여기](http://kreator-kaebal.github.io/webproject4)로  
+node express가 무엇인지는 [여기](https://kreator-kaebal.github.io/webproject4)로  
 한 줄 요약하면 자바스크립트로 서버도 만든다는 것이다.
 
 파이어베이스 클라우드 함수 프로젝트의 functions 폴더에 들어간 뒤[^1], npm으로 express를 설치해주자.
@@ -49,7 +49,7 @@ app.use(cors)는 CORS 에러[^2]를 해결하기 위해 express에서 제공해�
 라우팅을 하기 위해서는 기존 api 함수를 수정해줘야 한다.
 
 일단 함수에 있는 ```functions.https.onRequest...``` 등 firebase-functions와 관련된 요소들을 전부 제거해준 뒤 평범한 함수로 바꾼다.
-[웹프로젝트 7번](http://kreator-kaebal.github.io/webproject7/)에서 만든 datastore 함수를 예로 들면,
+[웹프로젝트 7번](https://kreator-kaebal.github.io/webproject7/)에서 만든 datastore 함수를 예로 들면,
 
 ```javascript
 export const datastore = functions.https.onRequest((request,response) => ...)
@@ -94,7 +94,7 @@ v1이라는 이름은 각자 원하는 것으로 교체해도 무방하다.
 
 ### 노드 익스프레스 api 이전하기
 
-이렇게 하면 이전 [express로 만든 api서버](http://kreator-kaebal.github.io/webproject4)를 파이어베이스 프로젝트로 옮기기 쉬워진다.  
+이렇게 하면 이전 [express로 만든 api서버](https://kreator-kaebal.github.io/webproject4)를 파이어베이스 프로젝트로 옮기기 쉬워진다.  
 
 ```javascript
 import express from "express";

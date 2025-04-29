@@ -72,7 +72,7 @@ solution 함수에서는 로그 데이터 lines 배열에 대해 초당 최대 �
 
 ```
 
-![Timeline](http://t1.kakaocdn.net/welcome2018/chuseok-01-v5.png)
+![Timeline](https://t1.kakaocdn.net/welcome2018/chuseok-01-v5.png)
 
 ## 문제 설명
 

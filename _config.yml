@@ -36,8 +36,7 @@ social:
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Kaebal Kim
   email: kaebalcreator34@protonmail.com # change to your email address
-  links:
-    https://github.com/Kreator-Kaebal
+  links: https://github.com/Kreator-Kaebal
     # The first element serves as the copyright owner's link
     # https://twitter.com/username # change to your Twitter homepage
     # https://github.com/username # change to your GitHub homepage

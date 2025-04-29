@@ -25,9 +25,3 @@ package-lock.json
 # Misc
 _sass/vendors
 assets/js/dist
-
-# Custom(Write your custom directories below)
-.devcontainer
-#.github
-.husky
-.vscode

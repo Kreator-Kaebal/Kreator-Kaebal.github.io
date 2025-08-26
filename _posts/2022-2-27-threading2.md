@@ -62,7 +62,7 @@ from threading import Thread
 - multiprocessing 라이브러리의 Process에서 Process를 Thread로 바꾸기만 하면 된다.
 - 나머지 기능(start,join 등)들도 Process와 동일하다.
   - 마찬가지로 인자 하나일 경우에 괄호 씌워주고 쉼표 붙여줘야 한다.
-- 사실 본인의 설명이 주객전도된 경우로, 원래 파이썬에서는 Thread가 먼저 구현되었고 그 다음 Process가 나왔다.
+- 사실 당직의 설명이 주객전도된 경우로, 원래 파이썬에서는 Thread가 먼저 구현되었고 그 다음 Process가 나왔다.
 
 ### 예제
 

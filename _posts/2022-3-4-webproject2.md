@@ -387,7 +387,7 @@ Tosso.module.css에
 아래 코드가 중요하다.  
 아래 코드를 통째로 복사한 뒤 프로젝트 루트 폴더에 **firebaseConfig.ts** 파일을 생성하여 통째로 붙여넣자.  
 ![wp2-img8](/images/posts/webproject2-img8.png)  
-본인은 firebase 폴더를 생성하여 그 아래에 넣었다.
+당직은 firebase 폴더를 생성하여 그 아래에 넣었다.
 
 ### 막간을 틈탄 firestore란
 

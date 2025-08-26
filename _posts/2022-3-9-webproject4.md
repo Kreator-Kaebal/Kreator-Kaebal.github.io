@@ -108,7 +108,7 @@ localhost:8080
 <h1>tosso is tissi</h1>
 ```
 
-본인은 tosso.html이라는 이름으로 다음과 같이 만들었다.
+당직은 tosso.html이라는 이름으로 다음과 같이 만들었다.
 
 ```javascript
 //(도메인)/ 주소에 tosso.html을 표시
@@ -169,7 +169,7 @@ app.get('/tosso', (request, response) => {
 (서버주소)/tosso에 GET 요청을 보낼 시 {message:'tosso'}라는 JSON이 클라이언트로 보낸다는 것이다.
 
 npm run dev로 서버를 실행해보고 http 요청을 보낼 수 있는 프로그램을 하나 실행시켜본다.  
-본인은 **POSTMAN**이라는 프로그램을 사용하였다. api 테스트시 아주 유용한 프로그램이다.  
+당직은 **POSTMAN**이라는 프로그램을 사용하였다. api 테스트시 아주 유용한 프로그램이다.  
 [다운로드는 여기서](https://www.postman.com/)
 
 ![wp4-img5](/images/posts/webproject4-img5.png)
@@ -243,7 +243,7 @@ app.post("/fcm", (request, response) => {
     // 헤더 부분
     headers: {
       "Content-Type": "application/json", // 보디가 JSON형식이라는 뜻
-      Authorization: `key=${serkey}`, // 본인이 서버라는 것을 증명하는 인증키-fcm은 key=(인증키) 이 형식으로 요구
+      Authorization: `key=${serkey}`, // 당직이 서버라는 것을 증명하는 인증키-fcm은 key=(인증키) 이 형식으로 요구
     },
     // 보디 부분
     data: {

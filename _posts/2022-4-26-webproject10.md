@@ -254,7 +254,7 @@ export default Signup;
 
 따라서 프로젝트 구조를 조금 뜯어고쳐서 메인→로그인→게시판 으로 가는 시스템을 구현해야 한다.  
 
-우선 index.tsx 코드를 통째로 이관시킨다. 본인은 **pages/tosso.tsx**에 붙여두었다.
+우선 index.tsx 코드를 통째로 이관시킨다. 당직은 **pages/tosso.tsx**에 붙여두었다.
 
 그 다음 index.tsx 코드를 지우고 다음과 같이 변경한다. 일단 사용할 임시 메인페이지이다.
 
@@ -459,7 +459,7 @@ https://github.com/kaebalsaebal/pseudo-website
 * 문서 없을때 수정/삭제/댓글달기 비활성화(클릭시 에러알림)
 * 제목이나 내용 둘중 하나라도 입력안하면 저장 못하도록
 
-```npm install```로 필요 모듈 설치후 ```public/firebase-messaging-sw.js```와 ```src/firebase/firebaseConfig.ts``` 파일을 본인 파이어베이스 설정으로 바꿔 작성해주자. 어떻게 작성하는가는 본 블로그의 *웹프로젝트2*, *웹프로젝트3* 에 나와있다.
+```npm install```로 필요 모듈 설치후 ```public/firebase-messaging-sw.js```와 ```src/firebase/firebaseConfig.ts``` 파일을 당직 파이어베이스 설정으로 바꿔 작성해주자. 어떻게 작성하는가는 본 블로그의 *웹프로젝트2*, *웹프로젝트3* 에 나와있다.
 
 ---
 [^1]: next.js의 특징으로 pages 폴더 안에 있는 자바스크립트 파일들은 /(파일 이름)으로 라우팅 없이 바로 접근할 수 있다. 참고로 세부 라우팅((주소)/A/B 이런식)을 하려면 pages에다 A라는 폴더를 만든 다음, 그 안에 B 파일을 생성하면 된다.

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: (일상) 4월 3일
+title: 3월 근황일기
 categories: [일상]
 tags: [nichijou]
 excerpt: Zomboid 서버 에러 해결을 포함한 일상, 각종 교양
